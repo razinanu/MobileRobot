@@ -2,13 +2,13 @@ apply plugin: 'com.android.model.application'
 
 model {
     android {
-        compileSdkVersion = 19
-        buildToolsVersion = "19.1.0"
+        compileSdkVersion = 23
+        buildToolsVersion = "23.0.2"
 
         defaultConfig.with {
             applicationId = "ch.hepia.lsn.opencv_native_androidstudio"
-            minSdkVersion.apiLevel = 19
-            targetSdkVersion.apiLevel = 19
+            minSdkVersion.apiLevel = 22
+            targetSdkVersion.apiLevel = 23
             versionCode = 1
             versionName = "1.0"
         }
@@ -20,9 +20,15 @@ model {
             // proguardFiles = getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    android.buildTypes {
+        release {
+            // minifyEnabled = false
+            // proguardFiles = getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
 
 
-    def openCVAndroidSdkDir = "/opt/opencv-android-sdk-v3.0/sdk/native"
+    def openCVAndroidSdkDir = "/Applications/OpenCV-android-sdk/sdk/native"
     android.ndk {
         moduleName = "native"
         cppFlags += "-I${file(openCVAndroidSdkDir + "/jni/include")}".toString()
