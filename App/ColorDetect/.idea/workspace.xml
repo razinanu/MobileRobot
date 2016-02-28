@@ -5,301 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3bc0a5f3-2ea7-4c5b-8920-ac8b4aaf70e8" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../.idea/.name" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../.idea/compiler.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../.idea/copyright/profiles_settings.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../.idea/gradle.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../.idea/misc.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../.idea/modules.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../.idea/runConfigurations.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../.idea/vcs.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../Android/app/.gitignore" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../Android/app/build.gradle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../Android/app/proguard-rules.pro" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../Android/app/src/androidTest/java/com/example/mobilerobot/mobilerobot/ApplicationTest.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../Android/app/src/main/AndroidManifest.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../Android/app/src/main/java/com/example/mobilerobot/mobilerobot/MainActivity.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../Android/app/src/main/res/layout/activity_main.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../Android/app/src/main/res/menu/menu_main.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../Android/app/src/main/res/mipmap-hdpi/ic_launcher.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../Android/app/src/main/res/mipmap-mdpi/ic_launcher.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../Android/app/src/main/res/mipmap-xhdpi/ic_launcher.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../Android/app/src/main/res/mipmap-xxhdpi/ic_launcher.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../Android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../Android/app/src/main/res/values-w820dp/dimens.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../Android/app/src/main/res/values/dimens.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../Android/app/src/main/res/values/strings.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../Android/app/src/main/res/values/styles.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../Android/app/src/test/java/com/example/mobilerobot/mobilerobot/ExampleUnitTest.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../Android/build.gradle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../Android/gradle.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../Android/gradle/wrapper/gradle-wrapper.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../Android/gradle/wrapper/gradle-wrapper.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../Android/gradlew" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../Android/gradlew.bat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../Android/settings.gradle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../.gitignore" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../app.iml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../build.gradle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../proguard-rules.pro" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/androidTest/java/ch/hepia/lsn/opencv_native_androidstudio/ApplicationTest.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/AndroidManifest.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/java/ch/hepia/lsn/opencv_native_androidstudio/MainActivity.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jni/native_opencv.cpp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jni/native_opencv.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/arm64-v8a/libopencv_calib3d.a" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/arm64-v8a/libopencv_core.a" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/arm64-v8a/libopencv_features2d.a" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/arm64-v8a/libopencv_flann.a" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/arm64-v8a/libopencv_hal.a" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/arm64-v8a/libopencv_highgui.a" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/arm64-v8a/libopencv_imgcodecs.a" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/arm64-v8a/libopencv_imgproc.a" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/arm64-v8a/libopencv_java3.so" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/arm64-v8a/libopencv_ml.a" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/arm64-v8a/libopencv_objdetect.a" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/arm64-v8a/libopencv_photo.a" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/arm64-v8a/libopencv_shape.a" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/arm64-v8a/libopencv_stitching.a" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/arm64-v8a/libopencv_superres.a" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/arm64-v8a/libopencv_ts.a" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/arm64-v8a/libopencv_video.a" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/arm64-v8a/libopencv_videoio.a" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/arm64-v8a/libopencv_videostab.a" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/armeabi-v7a/libopencv_calib3d.a" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/armeabi-v7a/libopencv_core.a" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/armeabi-v7a/libopencv_features2d.a" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/armeabi-v7a/libopencv_flann.a" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/armeabi-v7a/libopencv_hal.a" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/armeabi-v7a/libopencv_highgui.a" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/armeabi-v7a/libopencv_imgcodecs.a" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/armeabi-v7a/libopencv_imgproc.a" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/armeabi-v7a/libopencv_java3.so" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/armeabi-v7a/libopencv_ml.a" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/armeabi-v7a/libopencv_objdetect.a" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/armeabi-v7a/libopencv_photo.a" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/armeabi-v7a/libopencv_shape.a" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/armeabi-v7a/libopencv_stitching.a" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/armeabi-v7a/libopencv_superres.a" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/armeabi-v7a/libopencv_ts.a" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/armeabi-v7a/libopencv_video.a" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/armeabi-v7a/libopencv_videoio.a" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/armeabi-v7a/libopencv_videostab.a" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/armeabi/libopencv_calib3d.a" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/armeabi/libopencv_core.a" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/armeabi/libopencv_features2d.a" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/armeabi/libopencv_flann.a" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/armeabi/libopencv_hal.a" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/armeabi/libopencv_highgui.a" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/armeabi/libopencv_imgcodecs.a" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/armeabi/libopencv_imgproc.a" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/armeabi/libopencv_java3.so" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/armeabi/libopencv_ml.a" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/armeabi/libopencv_objdetect.a" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/armeabi/libopencv_photo.a" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/armeabi/libopencv_shape.a" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/armeabi/libopencv_stitching.a" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/armeabi/libopencv_superres.a" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/armeabi/libopencv_ts.a" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/armeabi/libopencv_video.a" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/armeabi/libopencv_videoio.a" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/armeabi/libopencv_videostab.a" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/mips/libopencv_calib3d.a" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/mips/libopencv_core.a" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/mips/libopencv_features2d.a" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/mips/libopencv_flann.a" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/mips/libopencv_hal.a" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/mips/libopencv_highgui.a" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/mips/libopencv_imgcodecs.a" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/mips/libopencv_imgproc.a" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/mips/libopencv_java3.so" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/mips/libopencv_ml.a" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/mips/libopencv_objdetect.a" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/mips/libopencv_photo.a" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/mips/libopencv_shape.a" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/mips/libopencv_stitching.a" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/mips/libopencv_superres.a" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/mips/libopencv_ts.a" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/mips/libopencv_video.a" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/mips/libopencv_videoio.a" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/mips/libopencv_videostab.a" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/mips64/libopencv_calib3d.a" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/mips64/libopencv_core.a" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/mips64/libopencv_features2d.a" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/mips64/libopencv_flann.a" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/mips64/libopencv_hal.a" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/mips64/libopencv_highgui.a" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/mips64/libopencv_imgcodecs.a" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/mips64/libopencv_imgproc.a" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/mips64/libopencv_java3.so" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/mips64/libopencv_ml.a" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/mips64/libopencv_objdetect.a" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/mips64/libopencv_photo.a" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/mips64/libopencv_shape.a" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/mips64/libopencv_stitching.a" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/mips64/libopencv_superres.a" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/mips64/libopencv_ts.a" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/mips64/libopencv_video.a" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/mips64/libopencv_videoio.a" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/mips64/libopencv_videostab.a" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/x86/libopencv_calib3d.a" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/x86/libopencv_core.a" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/x86/libopencv_features2d.a" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/x86/libopencv_flann.a" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/x86/libopencv_hal.a" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/x86/libopencv_highgui.a" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/x86/libopencv_imgcodecs.a" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/x86/libopencv_imgproc.a" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/x86/libopencv_java3.so" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/x86/libopencv_ml.a" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/x86/libopencv_objdetect.a" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/x86/libopencv_photo.a" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/x86/libopencv_shape.a" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/x86/libopencv_stitching.a" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/x86/libopencv_superres.a" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/x86/libopencv_ts.a" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/x86/libopencv_video.a" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/x86/libopencv_videoio.a" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/x86/libopencv_videostab.a" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/x86_64/libopencv_calib3d.a" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/x86_64/libopencv_core.a" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/x86_64/libopencv_features2d.a" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/x86_64/libopencv_flann.a" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/x86_64/libopencv_hal.a" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/x86_64/libopencv_highgui.a" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/x86_64/libopencv_imgcodecs.a" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/x86_64/libopencv_imgproc.a" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/x86_64/libopencv_java3.so" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/x86_64/libopencv_ml.a" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/x86_64/libopencv_objdetect.a" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/x86_64/libopencv_photo.a" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/x86_64/libopencv_shape.a" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/x86_64/libopencv_stitching.a" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/x86_64/libopencv_superres.a" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/x86_64/libopencv_ts.a" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/x86_64/libopencv_video.a" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/x86_64/libopencv_videoio.a" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/jniLibs/x86_64/libopencv_videostab.a" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/res/layout/activity_main.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/res/layout/content_main.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/res/menu/menu_main.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/res/mipmap-hdpi/ic_launcher.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/res/mipmap-mdpi/ic_launcher.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/res/mipmap-xhdpi/ic_launcher.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/res/mipmap-xxhdpi/ic_launcher.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/res/mipmap-xxxhdpi/ic_launcher.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/res/values/colors.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/res/values/dimens.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/main/res/values/strings.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../src/test/java/ch/hepia/lsn/opencv_native_androidstudio/ExampleUnitTest.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../build.gradle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../gradle.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../gradle/wrapper/gradle-wrapper.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../gradle/wrapper/gradle-wrapper.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../gradlew" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../gradlew.bat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../openCVLibrary300/build.gradle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../openCVLibrary300/lint.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../openCVLibrary300/openCVLibrary300.iml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../openCVLibrary300/src/main/AndroidManifest.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../openCVLibrary300/src/main/aidl/org/opencv/engine/OpenCVEngineInterface.aidl" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../openCVLibrary300/src/main/java/org/opencv/android/AsyncServiceHelper.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../openCVLibrary300/src/main/java/org/opencv/android/BaseLoaderCallback.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../openCVLibrary300/src/main/java/org/opencv/android/CameraBridgeViewBase.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../openCVLibrary300/src/main/java/org/opencv/android/FpsMeter.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../openCVLibrary300/src/main/java/org/opencv/android/InstallCallbackInterface.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../openCVLibrary300/src/main/java/org/opencv/android/JavaCameraView.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../openCVLibrary300/src/main/java/org/opencv/android/LoaderCallbackInterface.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../openCVLibrary300/src/main/java/org/opencv/android/OpenCVLoader.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../openCVLibrary300/src/main/java/org/opencv/android/StaticHelper.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../openCVLibrary300/src/main/java/org/opencv/android/Utils.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../openCVLibrary300/src/main/java/org/opencv/calib3d/Calib3d.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../openCVLibrary300/src/main/java/org/opencv/calib3d/StereoBM.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../openCVLibrary300/src/main/java/org/opencv/calib3d/StereoMatcher.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../openCVLibrary300/src/main/java/org/opencv/calib3d/StereoSGBM.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../openCVLibrary300/src/main/java/org/opencv/core/Algorithm.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../openCVLibrary300/src/main/java/org/opencv/core/Core.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../openCVLibrary300/src/main/java/org/opencv/core/CvException.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../openCVLibrary300/src/main/java/org/opencv/core/CvType.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../openCVLibrary300/src/main/java/org/opencv/core/DMatch.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../openCVLibrary300/src/main/java/org/opencv/core/KeyPoint.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../openCVLibrary300/src/main/java/org/opencv/core/Mat.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../openCVLibrary300/src/main/java/org/opencv/core/MatOfByte.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../openCVLibrary300/src/main/java/org/opencv/core/MatOfDMatch.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../openCVLibrary300/src/main/java/org/opencv/core/MatOfDouble.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../openCVLibrary300/src/main/java/org/opencv/core/MatOfFloat.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../openCVLibrary300/src/main/java/org/opencv/core/MatOfFloat4.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../openCVLibrary300/src/main/java/org/opencv/core/MatOfFloat6.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../openCVLibrary300/src/main/java/org/opencv/core/MatOfInt.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../openCVLibrary300/src/main/java/org/opencv/core/MatOfInt4.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../openCVLibrary300/src/main/java/org/opencv/core/MatOfKeyPoint.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../openCVLibrary300/src/main/java/org/opencv/core/MatOfPoint.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../openCVLibrary300/src/main/java/org/opencv/core/MatOfPoint2f.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../openCVLibrary300/src/main/java/org/opencv/core/MatOfPoint3.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../openCVLibrary300/src/main/java/org/opencv/core/MatOfPoint3f.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../openCVLibrary300/src/main/java/org/opencv/core/MatOfRect.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../openCVLibrary300/src/main/java/org/opencv/core/Point.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../openCVLibrary300/src/main/java/org/opencv/core/Point3.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../openCVLibrary300/src/main/java/org/opencv/core/Range.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../openCVLibrary300/src/main/java/org/opencv/core/Rect.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../openCVLibrary300/src/main/java/org/opencv/core/RotatedRect.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../openCVLibrary300/src/main/java/org/opencv/core/Scalar.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../openCVLibrary300/src/main/java/org/opencv/core/Size.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../openCVLibrary300/src/main/java/org/opencv/core/TermCriteria.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../openCVLibrary300/src/main/java/org/opencv/features2d/DescriptorExtractor.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../openCVLibrary300/src/main/java/org/opencv/features2d/DescriptorMatcher.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../openCVLibrary300/src/main/java/org/opencv/features2d/FeatureDetector.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../openCVLibrary300/src/main/java/org/opencv/features2d/Features2d.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../openCVLibrary300/src/main/java/org/opencv/imgcodecs/Imgcodecs.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../openCVLibrary300/src/main/java/org/opencv/imgproc/CLAHE.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../openCVLibrary300/src/main/java/org/opencv/imgproc/Imgproc.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../openCVLibrary300/src/main/java/org/opencv/imgproc/LineSegmentDetector.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../openCVLibrary300/src/main/java/org/opencv/imgproc/Subdiv2D.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../openCVLibrary300/src/main/java/org/opencv/ml/ANN_MLP.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../openCVLibrary300/src/main/java/org/opencv/ml/Boost.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../openCVLibrary300/src/main/java/org/opencv/ml/DTrees.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../openCVLibrary300/src/main/java/org/opencv/ml/EM.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../openCVLibrary300/src/main/java/org/opencv/ml/KNearest.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../openCVLibrary300/src/main/java/org/opencv/ml/LogisticRegression.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../openCVLibrary300/src/main/java/org/opencv/ml/Ml.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../openCVLibrary300/src/main/java/org/opencv/ml/NormalBayesClassifier.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../openCVLibrary300/src/main/java/org/opencv/ml/RTrees.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../openCVLibrary300/src/main/java/org/opencv/ml/SVM.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../openCVLibrary300/src/main/java/org/opencv/ml/StatModel.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../openCVLibrary300/src/main/java/org/opencv/ml/TrainData.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../openCVLibrary300/src/main/java/org/opencv/objdetect/BaseCascadeClassifier.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../openCVLibrary300/src/main/java/org/opencv/objdetect/CascadeClassifier.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../openCVLibrary300/src/main/java/org/opencv/objdetect/HOGDescriptor.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../openCVLibrary300/src/main/java/org/opencv/objdetect/Objdetect.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../openCVLibrary300/src/main/java/org/opencv/photo/AlignExposures.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../openCVLibrary300/src/main/java/org/opencv/photo/AlignMTB.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../openCVLibrary300/src/main/java/org/opencv/photo/CalibrateCRF.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../openCVLibrary300/src/main/java/org/opencv/photo/CalibrateDebevec.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../openCVLibrary300/src/main/java/org/opencv/photo/CalibrateRobertson.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../openCVLibrary300/src/main/java/org/opencv/photo/MergeDebevec.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../openCVLibrary300/src/main/java/org/opencv/photo/MergeExposures.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../openCVLibrary300/src/main/java/org/opencv/photo/MergeMertens.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../openCVLibrary300/src/main/java/org/opencv/photo/MergeRobertson.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../openCVLibrary300/src/main/java/org/opencv/photo/Photo.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../openCVLibrary300/src/main/java/org/opencv/photo/Tonemap.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../openCVLibrary300/src/main/java/org/opencv/photo/TonemapDrago.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../openCVLibrary300/src/main/java/org/opencv/photo/TonemapDurand.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../openCVLibrary300/src/main/java/org/opencv/photo/TonemapMantiuk.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../openCVLibrary300/src/main/java/org/opencv/photo/TonemapReinhard.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../openCVLibrary300/src/main/java/org/opencv/utils/Converters.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../openCVLibrary300/src/main/java/org/opencv/video/BackgroundSubtractor.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../openCVLibrary300/src/main/java/org/opencv/video/BackgroundSubtractorKNN.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../openCVLibrary300/src/main/java/org/opencv/video/BackgroundSubtractorMOG2.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../openCVLibrary300/src/main/java/org/opencv/video/DenseOpticalFlow.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../openCVLibrary300/src/main/java/org/opencv/video/DualTVL1OpticalFlow.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../openCVLibrary300/src/main/java/org/opencv/video/KalmanFilter.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../openCVLibrary300/src/main/java/org/opencv/video/Video.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../openCVLibrary300/src/main/java/org/opencv/videoio/VideoCapture.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../openCVLibrary300/src/main/java/org/opencv/videoio/Videoio.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../openCVLibrary300/src/main/res/values/attrs.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../opencv_native_androidstudio.iml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../settings.gradle" afterPath="" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/test/java/ch/hepia/lsn/opencv_native_androidstudio/ExampleUnitTest.java" afterPath="$PROJECT_DIR$/app/src/test/java/mobileRobot/imageProcessing/android/colorDetector/ExampleUnitTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build.gradle" afterPath="$PROJECT_DIR$/app/build.gradle" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/jni/native_opencv.cpp" afterPath="$PROJECT_DIR$/app/src/main/jni/native_opencv.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/jni/native_opencv.h" afterPath="$PROJECT_DIR$/app/src/main/jni/native_opencv.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="ColorDetect.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -340,11 +52,41 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/mobileRobot/imageProcessing/android/colorDetector/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
               <caret line="13" column="13" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="build.gradle" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/build.gradle">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="8" column="65" selection-start-line="8" selection-start-column="65" selection-end-line="8" selection-end-column="78" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="strings.xml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.19280206">
+              <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ApplicationTest.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/androidTest/java/mobileRobot/imageProcessing/android/colorDetector/ApplicationTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
               <folding />
             </state>
           </provider>
@@ -6924,7 +6666,7 @@
     </option>
     <option name="modificationStamps">
       <map>
-        <entry key="$PROJECT_DIR$" value="5826360729000" />
+        <entry key="$PROJECT_DIR$" value="5826425256000" />
       </map>
     </option>
     <option name="projectBuildClasspath">
@@ -7351,6 +7093,10 @@
         <option value="$PROJECT_DIR$/app/src/main/java/mobileRobot/imageProcessing/lsn/opencv_native_androidstudio/MainActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/mobileRobot/imageProcessing/android/opencv_native_androidstudio/MainActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/mobileRobot/imageProcessing/android/colorDetector/MainActivity.java" />
+        <option value="$PROJECT_DIR$/app/build.gradle" />
+        <option value="$PROJECT_DIR$/app/src/main/jni/native_opencv.cpp" />
+        <option value="$PROJECT_DIR$/app/src/main/jni/native_opencv.h" />
+        <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
       </list>
     </option>
   </component>
@@ -7358,8 +7104,10 @@
     <order />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="width" value="1280" />
-    <option name="height" value="800" />
+    <option name="x" value="62" />
+    <option name="y" value="23" />
+    <option name="width" value="1219" />
+    <option name="height" value="777" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="true" id="Add" />
@@ -7413,6 +7161,20 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="openCVLibrary300" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ColorDetect" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ColorDetect" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="app" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -7432,70 +7194,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ColorDetect" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ColorDetect" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ColorDetect" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ColorDetect" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mobileRobot" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="imageProcessing" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="android" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="colorDetector" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -7536,10 +7234,6 @@
               <option name="myItemId" value="android" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="colorDetector" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
@@ -7573,8 +7267,8 @@
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="recentsLimit" value="5" />
     <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_SERIALS" value="" />
-    <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_AVD" value="Nexus_5_API_23" />
-    <property name="FullScreen" value="true" />
+    <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_AVD" value="mobileRobot" />
+    <property name="FullScreen" value="false" />
   </component>
   <component name="RunManager" selected="Android Application.app">
     <configuration default="true" type="AndroidNativeRunConfigurationType" factoryName="Android Native">
@@ -7796,36 +7490,36 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1280" height="800" extended-state="0" />
-    <editor active="false" />
+    <frame x="62" y="23" width="1219" height="777" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3286119" sideWeight="0.48949918" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32829046" sideWeight="0.67204756" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32829046" sideWeight="0.64740866" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.30878186" sideWeight="0.5129241" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32829046" sideWeight="0.35259134" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.090468496" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.095157176" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.4168013" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.30878186" sideWeight="0.48707592" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2786746" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31770045" sideWeight="0.47323704" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32829046" sideWeight="0.48676345" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
@@ -7854,10 +7548,74 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/openCVLibrary300/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/mobileRobot/imageProcessing/android/colorDetector/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="13" column="13" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/settings.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/jni/native_opencv.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.46272492">
+          <caret line="16" column="58" selection-start-line="16" selection-start-column="58" selection-end-line="16" selection-end-column="58" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/jni/native_opencv.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.12430939">
+          <caret line="3" column="19" selection-start-line="3" selection-start-column="19" selection-end-line="3" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.0">
+          <caret line="0" column="26" selection-start-line="0" selection-start-column="25" selection-end-line="0" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="8" column="65" selection-start-line="8" selection-start-column="65" selection-end-line="8" selection-end-column="78" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/androidTest/java/mobileRobot/imageProcessing/android/colorDetector/ApplicationTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.19280206">
+          <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
           <folding />
         </state>
       </provider>

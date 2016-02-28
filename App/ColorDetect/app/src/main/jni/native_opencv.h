@@ -1,5 +1,5 @@
-#ifndef OPENCV_NATIVE_ANDROIDSTUDIO_NATIVE_OPENCV_H
-#define OPENCV_NATIVE_ANDROIDSTUDIO_NATIVE_OPENCV_H
+#ifndef MOBILEROBOT_IMAGEPROCESSING_ANDROID_COLORDETECTOR_H
+#define MOBILEROBOT_IMAGEPROCESSING_ANDROID_COLORDETECTOR_H
 
 #include <jni.h>
 #include <opencv2/core/core.hpp>
@@ -8,9 +8,10 @@
 #include <vector>
 
 extern "C" {
-JNIEXPORT void JNICALL Java_ch_hepia_lsn_opencv_1native_1androidstudio_MainActivity_salt(JNIEnv *env, jobject instance,
-                                                                                         jlong matAddrGray,
-                                                                                         jint nbrElem);
+JNIEXPORT void JNICALL Java_mobileRobot_imageProcessing_android_colorDetector_MainActivity_salt(
+        JNIEnv *env, jobject instance,
+        jlong matAddrGray,
+        jint nbrElem);
 
 }
-#endif //OPENCV_NATIVE_ANDROIDSTUDIO_NATIVE_OPENCV_H
+#endif //MOBILEROBOT_IMAGEPROCESSING_ANDROID_COLORDETECTOR_H

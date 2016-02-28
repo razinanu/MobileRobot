@@ -6,7 +6,7 @@ model {
         buildToolsVersion = "23.0.2"
 
         defaultConfig.with {
-            applicationId = "ch.hepia.lsn.opencv_native_androidstudio"
+            applicationId = "mobileRobot.imageProcessing.android.colorDetector"
             minSdkVersion.apiLevel = 22
             targetSdkVersion.apiLevel = 23
             versionCode = 1
