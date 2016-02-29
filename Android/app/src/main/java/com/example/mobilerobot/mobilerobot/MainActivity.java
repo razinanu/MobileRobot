@@ -1,16 +1,38 @@
 package com.example.mobilerobot.mobilerobot;
 
+import android.bluetooth.BluetoothSocket;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 public class MainActivity extends ActionBarActivity {
+
+    private BTClient bt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        bt = new BTClient();
+        startActivityForResult(bt.startBT(), 0);
+
+        /*LinearLayout lView = new LinearLayout(this);
+        TextView myText = null;
+
+        myText = new TextView(this);
+        myText.setText(bt.getDevices());
+
+        lView.addView(myText);
+
+        setContentView(lView);*/
+
+        BluetoothSocket connection = bt.connect();
+        bt.send(connection);
     }
 
     @Override
@@ -33,5 +55,11 @@ public class MainActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onResume()
+    {
+        super.onResume();
     }
 }
