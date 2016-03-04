@@ -18,6 +18,9 @@ class RFCOMMServer:
         print "Accepted connection from ",address
     
     def wait_for_data(self):
+        """ IMPORTANT: blocks other processes. Stop movement before calling this method!
+        """
+        
         data = self.__client_sock.recv(1024)
         print "received [%s]" % data
         return data
