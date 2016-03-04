@@ -1,4 +1,4 @@
-package com.example.mobilerobot.mobilerobot;
+package mobileRobot.imageProcessing.android.colorDetector;
 
 import android.bluetooth.*;
 import android.content.Intent;
@@ -79,12 +79,11 @@ class BTClient
     }
 
 
-    public void send(BluetoothSocket connection)
+    public void send(BluetoothSocket connection, String message)
     {
         OutputStream out = null;
 
-        String text = "blablabla";
-        byte[] tbyte = text.getBytes();
+        byte[] tbyte = message.getBytes();
 
         try {
             out = connection.getOutputStream();

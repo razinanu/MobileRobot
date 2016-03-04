@@ -10,11 +10,14 @@ import org.opencv.android.CameraBridgeViewBase;
 import org.opencv.android.LoaderCallbackInterface;
 import org.opencv.android.OpenCVLoader;
 import org.opencv.core.Mat;
+import android.bluetooth.BluetoothSocket;
 
 public class MainActivity extends Activity implements CameraBridgeViewBase.CvCameraViewListener2 {
     private static final String TAG = "OCVSample::Activity";
 
     private CameraBridgeViewBase mOpenCvCameraView;
+    private BTClient btclient;
+    private BluetoothSocket btconnection;
 
     private BaseLoaderCallback mLoaderCallback = new BaseLoaderCallback(this) {
         @Override
@@ -47,6 +50,10 @@ public class MainActivity extends Activity implements CameraBridgeViewBase.CvCam
         mOpenCvCameraView = (CameraBridgeViewBase) findViewById(R.id.main_surface);
         mOpenCvCameraView.setVisibility(SurfaceView.VISIBLE);
         mOpenCvCameraView.setCvCameraViewListener(this);
+
+        btclient = new BTClient();
+        startActivityForResult(btclient.startBT(), 0);
+        btconnection = btclient.connect();
     }
 
     @Override
@@ -58,6 +65,9 @@ public class MainActivity extends Activity implements CameraBridgeViewBase.CvCam
     @Override
     public void onResume() {
         super.onResume();
+
+        btclient.send(btconnection, "hello robot!");
+
         if (!OpenCVLoader.initDebug()) {
             Log.d(TAG, "Internal OpenCV library not found. Using OpenCV Manager for initialization");
             OpenCVLoader.initAsync(OpenCVLoader.OPENCV_VERSION_3_0_0, this, mLoaderCallback);
