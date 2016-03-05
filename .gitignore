@@ -1,6 +1,7 @@
 # Built application files
 *.apk
 *.ap_
+*.bat
 
 # Files for the Dalvik VM
 *.dex
@@ -14,7 +15,7 @@ gen/
 out/
 
 # Gradle files
-*.gradle/
+*.gradle
 build/
 
 # Local configuration file (sdk path, etc)
@@ -28,7 +29,7 @@ proguard/
 
 # Android Studio Navigation editor temp files
 .navigation/
-.gradle
+
 /local.properties
 /.idea/workspace.xml
 /.idea/libraries
@@ -43,6 +44,3 @@ captures/
 # Android Studio
 *.iml
 *.idea
-/EV3/.project
-/EV3/.pydevproject
-/EV3/.settings/org.eclipse.core.resources.prefs

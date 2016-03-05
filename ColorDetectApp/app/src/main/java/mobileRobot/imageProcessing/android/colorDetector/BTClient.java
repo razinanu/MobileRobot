@@ -30,7 +30,7 @@ class BTClient
 
     private BluetoothDevice getEv3()
     {
-        //TODO: not elegant, would probably only work for my phone
+        //TODO: not elegant, , should configure for each phone
 
         pairedDevices = adap.getBondedDevices();
         for( BluetoothDevice device : pairedDevices )
