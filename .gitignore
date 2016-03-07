@@ -44,3 +44,8 @@ captures/
 # Android Studio
 *.iml
 *.idea
+/EV3/.project
+/EV3/.pydevproject
+/EV3/.settings/org.eclipse.core.resources.prefs
+
+/ColorDetectApp/app/src/main/jniLibs
