@@ -6,29 +6,36 @@ from navigator import Navigator
 import time
 
 
-#btserver = RFCOMMServer()
-#btserver.wait_for_connection()
+LOOP_DURATION = 0.01  # in s
+ok = True
 
-nav = Navigator()
+print "Welcome!"
 
-print "drive 3s straight"
+print "Waiting for bluetooth connection..."
+btserver = RFCOMMServer()
+btserver.wait_for_connection()
+print "Connected!"
 
-nav.drive_straight(3000)
-time.sleep(4)
 
-print "turn 2s left"
+nav = Navigator(LOOP_DURATION)
 
-nav.turn(2000, True)
-time.sleep(3)
+while ok:
+    start = time.time()
+    nav.move()  #no code before this point!
+    
+    # TODO: here comes the other code
+    
+    
+    data = btserver.wait_for_data() # no code after this point!
+    
+    end = time.time()
+    remain = start + LOOP_DURATION - end
+    if remain > 0:
+        time.sleep(remain)
 
-print "turn 2s right"
 
-nav.turn(2000, False)
-time.sleep(3)
+print "Close bluetooth connection..."
+btserver.close()
+print "Closed!"
 
-print "finished"
-
-#while True:
-    #data = btserver.wait_for_data() currently not used
-
-#btserver.close()
+print "Program finished."

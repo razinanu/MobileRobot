@@ -49,3 +49,6 @@ captures/
 /EV3/.settings/org.eclipse.core.resources.prefs
 
 /ColorDetectApp/app/src/main/jniLibs
+/.gitignore~
+/EV3/rfcomm_server.pyc
+/EV3/navigator.pyc

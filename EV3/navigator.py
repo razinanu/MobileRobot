@@ -2,23 +2,71 @@
 # -*- coding: utf-8 -*-
 
 import ev3dev.ev3 as ev3
+from genmsg.msgs import DURATION
 
+
+STRAIGHT = 'straight'
+REVERSE = 'reverse'
+LEFT = 'left'
+RIGHT = 'right'
 
 class Navigator:
     
-    def __init__(self):
+    def __init__(self, loop_duration):
         self.__left = ev3.Motor('outA')
         self.__right = ev3.Motor('outB')
+        self.__loop_duration = loop_duration / 1000.0
         
-    def drive_straight(self, duration):
+        self.__move_duration = 0
+        self.__direction =  STRAIGHT
+    
+    def move(self):
+        if self.__move_duration <= 0:
+            return
+        
+        if self.__move_duration > self.__loop_duration:
+            dur = self.__loop_duration
+        else:
+            dur = self.__move_duration
+        
+        self.__move_duration -= dur
+        
+        if self.__direction == STRAIGHT:
+            self.__drive_straight(dur, 'normal')
+        elif self.__direction == REVERSE:
+            self.__drive_straight(dur, 'inversed')
+        elif self.__direction == LEFT:
+            self.__turn(dur, True)
+        elif self.__direction == RIGHT:
+            self.__turn(dur, False)
+        else:
+            print "ERROR! Navigation direction not understood. Given command was: ", self.__direction
+            
+    def give_command(self, duration, direction):
+        """ Use this command to control the robot.
+        
+        possible directions: 'straight', 'reverse', 'left', 'right'
+        duration in ms
+        """
+        if direction not in [STRAIGHT, REVERSE, LEFT, RIGHT]:
+            print "ERROR! Given direction was not understood. (", direction, ")"
+            return False
+        
+        self.__move_duration = duration
+        self.__direction = direction
+        
+        return True
+    
+        
+    def __drive_straight(self, duration, dir):
         """
         duration in ms
         """
         
-        self.__left.run_timed(time_sp=duration, duty_cycle_sp=75)
-        self.__right.run_timed(time_sp=duration, duty_cycle_sp=75)
+        self.__left.run_timed(time_sp=duration, polarity=dir, duty_cycle_sp=75)
+        self.__right.run_timed(time_sp=duration, polarity=dir, duty_cycle_sp=75)
         
-    def turn(self, duration, turn_left):
+    def __turn(self, duration, turn_left):
         """
         duration in ms
         turn_left = true --> left, else right
