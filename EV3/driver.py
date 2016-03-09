@@ -2,13 +2,12 @@
 # -*- coding: utf-8 -*-
 
 import ev3dev.ev3 as ev3
-from genmsg.msgs import DURATION
 
-
-STRAIGHT = 'straight'
-REVERSE = 'reverse'
-LEFT = 'left'
-RIGHT = 'right'
+class Direction:
+    STRAIGHT = 'straight'
+    REVERSE = 'reverse'
+    LEFT = 'left'
+    RIGHT = 'right'
 
 class Driver:
     
@@ -18,7 +17,7 @@ class Driver:
         self.__loop_duration = loop_duration / 1000.0
         
         self.__move_duration = 0
-        self.__direction =  STRAIGHT
+        self.__direction =  Direction.STRAIGHT
     
     def move(self):
         if self.__move_duration <= 0:
@@ -31,24 +30,30 @@ class Driver:
         
         self.__move_duration -= dur
         
-        if self.__direction == STRAIGHT:
+        if self.__direction == Direction.STRAIGHT:
             self.__drive_straight(dur, 'normal')
-        elif self.__direction == REVERSE:
+        elif self.__direction == Direction.REVERSE:
             self.__drive_straight(dur, 'inversed')
-        elif self.__direction == LEFT:
+        elif self.__direction == Direction.LEFT:
             self.__turn(dur, True)
-        elif self.__direction == RIGHT:
+        elif self.__direction == Direction.RIGHT:
             self.__turn(dur, False)
         else:
             print "ERROR! Navigation direction not understood. Given command was: ", self.__direction
+            return False
+        
+        return True
             
     def give_command(self, duration, direction):
         """ Use this command to control the robot.
         
         possible directions: 'straight', 'reverse', 'left', 'right'
-        duration in ms
+        duration in ms. If duration < 0, keep old orders.
         """
-        if direction not in [STRAIGHT, REVERSE, LEFT, RIGHT]:
+        if duration < 0:
+            return True
+        
+        if direction not in [Direction.STRAIGHT, Direction.REVERSE, Direction.LEFT, Direction.RIGHT]:
             print "ERROR! Given direction was not understood. (", direction, ")"
             return False
         
@@ -58,13 +63,13 @@ class Driver:
         return True
     
         
-    def __drive_straight(self, duration, dir):
+    def __drive_straight(self, duration, direction):
         """
         duration in ms
         """
         
-        self.__left.run_timed(time_sp=duration, polarity=dir, duty_cycle_sp=75)
-        self.__right.run_timed(time_sp=duration, polarity=dir, duty_cycle_sp=75)
+        self.__left.run_timed(time_sp=duration, polarity=direction, duty_cycle_sp=75)
+        self.__right.run_timed(time_sp=duration, polarity=direction, duty_cycle_sp=75)
         
     def __turn(self, duration, turn_left):
         """
