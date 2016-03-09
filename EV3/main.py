@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from rfcomm_server import RFCOMMServer
-from navigator import Navigator
+from driver import Driver
 import time
 
 
@@ -17,11 +17,12 @@ btserver.wait_for_connection()
 print "Connected!"
 
 
-nav = Navigator(LOOP_DURATION)
+driver = Driver(LOOP_DURATION)
+data = 0
 
 while ok:
     start = time.time()
-    nav.move()  #no code before this point!
+    driver.move()  #no code before this point!
     
     # TODO: here comes the other code
     

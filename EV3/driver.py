@@ -10,7 +10,7 @@ REVERSE = 'reverse'
 LEFT = 'left'
 RIGHT = 'right'
 
-class Navigator:
+class Driver:
     
     def __init__(self, loop_duration):
         self.__left = ev3.Motor('outA')
