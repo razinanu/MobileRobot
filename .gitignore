@@ -52,3 +52,6 @@ captures/
 /.gitignore~
 /EV3/rfcomm_server.pyc
 /EV3/navigator.pyc
+/EV3/ev3_statemachine.pyc
+/EV3/statemachine.pyc
+/EV3/test.py
