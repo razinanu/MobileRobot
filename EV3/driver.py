@@ -8,6 +8,7 @@ class Direction:
     REVERSE = 'reverse'
     LEFT = 'left'
     RIGHT = 'right'
+    STOP = 'stop'
 
 class Driver:
     
@@ -38,22 +39,27 @@ class Driver:
             self.__turn(dur, True)
         elif self.__direction == Direction.RIGHT:
             self.__turn(dur, False)
+        elif self.__direction == Direction.STOP:
+            self.stop_movement()
         else:
             print "ERROR! Navigation direction not understood. Given command was: ", self.__direction
             return False
         
         return True
             
-    def give_command(self, duration, direction):
+    def give_command(self, direction, duration):
         """ Use this command to control the robot.
         
         possible directions: 'straight', 'reverse', 'left', 'right'
         duration in ms. If duration < 0, keep old orders.
         """
+        if duration == False and direction == False:
+            return False
+        
         if duration < 0:
             return True
         
-        if direction not in [Direction.STRAIGHT, Direction.REVERSE, Direction.LEFT, Direction.RIGHT]:
+        if direction not in [Direction.STRAIGHT, Direction.REVERSE, Direction.LEFT, Direction.RIGHT, Direction.STOP]:
             print "ERROR! Given direction was not understood. (", direction, ")"
             return False
         

@@ -2,9 +2,11 @@
 # -*- coding: utf-8 -*-
 
 class State:
+#TODO: more general function assignment
 
     def __init__(self, name):
         self.__next = {}
+        self.__generic_functions = {}
         self.__name = name #only for error handling
     
     def add_transition(self, successor, identifier):
@@ -24,6 +26,12 @@ class State:
         """only for debugging"""
         return self.__name
 
+    def assign_function(self, identifier, function_name):
+        self.__generic_functions[identifier] = function_name
+
+    def execute_function(self, identifier, *params):
+        return self.__generic_functions[identifier](*params)
+
 class StateMachine:
     
     def __init__(self):
@@ -40,6 +48,9 @@ class StateMachine:
     def _add_transition(self, pred, suc, identifier):
         # TODO: currently no error handling, assume correct usage
         self.__states[pred].add_transition(self.__states[suc], identifier)
+    
+    def assign_function(self, state_identifier, function_identifier, function):
+        self.__states[state_identifier].assign_function(function_identifier, function)
         
     def current(self):
         return self.__current
