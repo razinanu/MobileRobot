@@ -56,7 +56,7 @@ class Navigator:
         self.__mach.assign_function (State.EVASION,       self.__evasion)
         self.__mach.assign_function (State.REGAIN,      self.__regain)
             
-    def find_commands(self):
+    def find_commands(self, queue_size):
         orders, transition = self.__mach.execute_functions(self.__line_data, self.__bt_data)
         
         if transition != 0:
