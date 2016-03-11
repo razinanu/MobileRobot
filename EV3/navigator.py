@@ -6,36 +6,56 @@ from ev3_statemachine import State
 from ev3_statemachine import Transition
 from driver import Direction
 
+class order:
+    @staticmethod
+    def stop(duration=0):
+        return (Direction.STOP, duration)
+    
+    @staticmethod
+    def straight(duration=0):
+        return (Direction.STRAIGHT, duration)
+    
+    @staticmethod
+    def reverse(duration=0):
+        return (Direction.REVERSE, duration)
+
+    @staticmethod
+    def left(duration=0):
+        return (Direction.LEFT, duration)
+    
+    @staticmethod
+    def right(duration=0):
+        return (Direction.RIGHT, duration)
+    
+    @staticmethod
+    def keep_going():
+        return (Direction.STRAIGHT, -1)
+    
 class Navigator:
 
     def __init__(self):
         self.__bt_data = 0
+        self.__line_data = 0
         
         self.__mach = EV3StateMachine()
         
-        self.__mach.assign_line_function(State.SEARCH, self.__avoid_line)
-        self.__mach.assign_line_function(State.APPROACH, self.__avoid_line)
-        self.__mach.assign_line_function(State.GRAB, self.__avoid_line)  #should not be used
-        self.__mach.assign_line_function(State.RETRIEVE, self.__lock_line)    # TODO: something different
-        self.__mach.assign_line_function(State.LINE, self.__lock_line)
-        self.__mach.assign_line_function(State.RELEASE, self.__avoid_line)   #should not be used
-        
-        self.__mach.assign_command_function(State.SEARCH, self.__search)
-        self.__mach.assign_command_function(State.APPROACH, self.__approach)
-        self.__mach.assign_command_function(State.GRAB, self.__grab)
-        self.__mach.assign_command_function(State.RETRIEVE, self.__find_site)
-        self.__mach.assign_command_function(State.LINE, self.__follow_line)
-        self.__mach.assign_command_function(State.RELEASE, self.__release)
+        self.__mach.assign_functions (State.SEARCH,      self.__search)
+        self.__mach.assign_functions (State.APPROACH,    self.__approach)
+        self.__mach.assign_functions (State.GRAB,        self.__grab)
+        self.__mach.assign_functions (State.RETRIEVE,    self.__find_site)
+        self.__mach.assign_functions (State.LINE,        self.__follow_line)
+        self.__mach.assign_functions (State.RELEASE,     self.__release)
+        self.__mach.assign_functions (State.EVASION,       self.__evasion)
+        self.__mach.assign_functions (State.REGAIN,      self.__regain)
             
     def find_commands(self):
-        self.__mach.execute_line_function(self.__line_data)
-        direction, transition = self.__mach.execute_command_function(self.__bt_data)
+        orders, transition = self.__mach.execute_functions(self.__line_data, self.__bt_data)
         
         if transition != 0:
             if not self.__mach.transition(transition):
-                return 0
+                return False, 0
         
-        return direction
+        return orders
     
     def get_bt(self, data):
         #TODO interpret data
@@ -46,60 +66,80 @@ class Navigator:
         self.__line_data = data
         #TODO get directly from sensor
     
+    def __nearest_obstacle(self, line_data, bt_data):
+        return 0
     
     
-    def __search(self, bt_data):
+    def __search(self, line_data, bt_data):
         # 1.) hit line --> turn
         if self.__avoid_line:
-            return self.__evasion()
+            return order.stop(), Transition.LINE
         
         # 2.) found obstacle
         if self.__nearest_obstacle(bt_data) != 0:
-            return Direction.STOP, Transition.FOUND_OBJECT
+            return order.stop(), Transition.SUCCESS
         
         # 3.) drive straight
-        return Direction.STRAIGHT, 0
+        return order.drive()
 
-    def __approach(self, bt_data):
+    def __approach(self, line_data, bt_data):
         # 1.) hit line --> turn. Should not happen in convex field
         if self.__avoid_line:
-            return self.__evasion()
+            return order.stop(), Transition.LINE
         
-        if self.__nearest_obstacle(bt_data) != 0:
-            #TODO: approach without hitting other objects.
-            return Direction.STRAIGHT, 0
-        else:
-            #TODO: wait a short time, then return to search
-            return Direction.STOP, Transition.FAIL
+        # if found --> success
+        # if seen --> approach further
+        # if lost --> fail
+        
+        return order.stop(), 0
     
-    def __grab(self, bt_data):
+    def __grab(self, line_data, bt_data):
         """close gripper, check for success and color"""
-        pass
-    
-    def __find_site(self, bt_data):
-        """move randomly until line or site is found"""
-        pass
-    
-    def __follow_line(self, bt_data):
-        """follow line"""
-        pass
-    
-    def __release(self, bt_data):
-        """open gripper"""
-        pass
-            
-    def __evasion(self):
-        """ return the way you came and turn. when finished, Transition.FAIL"""
-        pass 
-     
-    def __nearest_obstacle(self, bt_data):
-        return 0
         
-    def __avoid_line(self, line_seen):
-        """Resets to False as soon as avoidance is finished (in different function)"""
-        #TODO: assumption: line_data is bool. Else convert to bool
-        self.__avoid_line = self.__avoid_line or line_seen
-          
-    def __lock_line(self, line_seen):
-        self.__line_following = line_seen
+        # close gripper
+        # if closed and ball in front of sensor --> success
+        # if closed and nothing in front of sensor --> fail
+        
+        return order.stop(), 0
+    
+    def __find_site(self, line_data, bt_data):
+        """move randomly until line or site is found"""
+        
+        # move rand
+        # if line or wrong site --> line
+        # if correct site --> success
+        
+        return order.stop(), 0
+    
+    def __follow_line(self, line_data, bt_data):
+        """follow line"""
+        
+        # stay on line
+        # if correct site --> success
+        
+        return order.stop(), 0
+    
+    def __release(self, line_data, bt_data):
+        """open gripper"""
+        
+        # open gripper
+        # if open --> success (what about turning and facing the field again? Done in "Search", because site is seen as line?)
+        
+        return order.stop(), 0
             
+    def __evasion(self, line_data, bt_data):
+        """ return the way you came and turn. when finished, Transition.FAIL"""
+        
+        # drive backwards and turn
+        # if finished --> success
+        
+        return order.stop(), 0
+    
+    def __regain(self, line_data, bt_data):
+        """ wiggle around on position to find a lost object."""
+        
+        # stand still for short time. wiggle around.
+        # if after this nothing found --> fail
+        # if sometimes in between object seen --> success
+        
+        return order.stop(), 0

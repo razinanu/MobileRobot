@@ -26,7 +26,7 @@ class State:
         """only for debugging"""
         return self.__name
 
-    def assign_function(self, identifier, function_name):
+    def assign_generic_function(self, identifier, function_name):
         self.__generic_functions[identifier] = function_name
 
     def execute_function(self, identifier, *params):
@@ -49,8 +49,8 @@ class StateMachine:
         # TODO: currently no error handling, assume correct usage
         self.__states[pred].add_transition(self.__states[suc], identifier)
     
-    def assign_function(self, state_identifier, function_identifier, function):
-        self.__states[state_identifier].assign_function(function_identifier, function)
+    def assign_generic_function(self, state_identifier, function_identifier, function):
+        self.__states[state_identifier].assign_generic_function(function_identifier, function)
         
     def current(self):
         return self.__current
