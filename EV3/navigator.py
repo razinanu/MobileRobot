@@ -28,6 +28,14 @@ class order:
         return (Direction.RIGHT, duration)
     
     @staticmethod
+    def open():
+        return (Direction.OPEN, 500)
+    
+    @staticmethod
+    def close():
+        return (Direction.CLOSE, 500)
+    
+    @staticmethod
     def keep_going():
         return (Direction.STRAIGHT, -1)
     
@@ -39,14 +47,14 @@ class Navigator:
         
         self.__mach = EV3StateMachine()
         
-        self.__mach.assign_functions (State.SEARCH,      self.__search)
-        self.__mach.assign_functions (State.APPROACH,    self.__approach)
-        self.__mach.assign_functions (State.GRAB,        self.__grab)
-        self.__mach.assign_functions (State.RETRIEVE,    self.__find_site)
-        self.__mach.assign_functions (State.LINE,        self.__follow_line)
-        self.__mach.assign_functions (State.RELEASE,     self.__release)
-        self.__mach.assign_functions (State.EVASION,       self.__evasion)
-        self.__mach.assign_functions (State.REGAIN,      self.__regain)
+        self.__mach.assign_function (State.SEARCH,      self.__search)
+        self.__mach.assign_function (State.APPROACH,    self.__approach)
+        self.__mach.assign_function (State.GRAB,        self.__grab)
+        self.__mach.assign_function (State.RETRIEVE,    self.__find_site)
+        self.__mach.assign_function (State.LINE,        self.__follow_line)
+        self.__mach.assign_function (State.RELEASE,     self.__release)
+        self.__mach.assign_function (State.EVASION,       self.__evasion)
+        self.__mach.assign_function (State.REGAIN,      self.__regain)
             
     def find_commands(self):
         orders, transition = self.__mach.execute_functions(self.__line_data, self.__bt_data)
@@ -63,7 +71,7 @@ class Navigator:
         return True
     
     def get_line(self, data):
-        self.__line_data = data
+        self.__line_data = data # assumption: bool. TODO: handle differently; to allow distinction between sites and lines.
         #TODO get directly from sensor
     
     def __nearest_obstacle(self, line_data, bt_data):
@@ -72,7 +80,7 @@ class Navigator:
     
     def __search(self, line_data, bt_data):
         # 1.) hit line --> turn
-        if self.__avoid_line:
+        if self.__line_data:
             return order.stop(), Transition.LINE
         
         # 2.) found obstacle
@@ -84,7 +92,7 @@ class Navigator:
 
     def __approach(self, line_data, bt_data):
         # 1.) hit line --> turn. Should not happen in convex field
-        if self.__avoid_line:
+        if self.__line_data:
             return order.stop(), Transition.LINE
         
         # if found --> success

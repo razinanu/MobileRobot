@@ -9,13 +9,17 @@ class Direction:
     LEFT = 'left'
     RIGHT = 'right'
     STOP = 'stop'
+    
+    OPEN = 'open'
+    CLOSE = 'close'
 
 class Driver:
     
     def __init__(self, loop_duration):
         self.__left = ev3.Motor('outA')
         self.__right = ev3.Motor('outB')
-        self.__loop_duration = loop_duration / 1000.0
+        self.__gripper = ev3.Motor('outC')
+        self.__loop_duration = loop_duration * 1000.0
         
         self.__orders = [(Direction.STRAIGHT, 0),]
     
@@ -35,6 +39,10 @@ class Driver:
             self.__turn(move_duration, False)
         elif move_direction == Direction.STOP:
             self.__stop_movement()
+        elif move_direction == Direction.OPEN:
+            self.__move_gripper(move_duration, True)
+        elif move_direction == Direction.CLOSE:
+            self.__move_gripper(move_duration, False)
         else:
             print "ERROR! Navigation direction not understood. Given command was: ", move_direction
             return False
@@ -65,7 +73,7 @@ class Driver:
         possible directions: 'straight', 'reverse', 'left', 'right'
         duration in ms. If duration < 0, keep old orders.
         
-        TODO: queue of timed actions. or endless action.
+        TODO: delete endless actions!
         """
         if isinstance(orders, list):
             r = True
@@ -80,20 +88,21 @@ class Driver:
         if duration < 0:
             return True
         
-        if direction not in [Direction.STRAIGHT, Direction.REVERSE, Direction.LEFT, Direction.RIGHT, Direction.STOP]:
+        if direction not in [Direction.STRAIGHT, Direction.REVERSE, Direction.LEFT, Direction.RIGHT, Direction.STOP, Direction.OPEN, Direction.CLOSE]:
             print "ERROR! Given direction was not understood. (", direction, ")"
             return False
         
-        if duration == 0:
-            del self.__orders[:]
-            self.__orders.append((direction, duration))
+        # never deleting?
+#         if duration == 0:
+#             del self.__orders[:]
+        
+        self.__orders.append((direction, duration))
         
         return True
     
     def get_command_count(self):
         #TODO: queue of orders
         return 0
-    
         
     def __drive_straight(self, duration, direction):
         """
@@ -120,4 +129,9 @@ class Driver:
         """ stop all movement """
         self.__left.stop()
         self.__right.stop()       
-        
+    
+    def __move_gripper(self, duration, should_open):
+        if should_open:
+            self.__gripper.run_timed(time_sp=duration, polarity='normal', duty_cycle_sp=50)
+        else:
+            self.__gripper.run_timed(time_sp=duration, polarity='inversed', duty_cycle_sp=50)
