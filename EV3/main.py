@@ -26,7 +26,7 @@ while ok:
     
     # TODO: here comes the other code
     ok = ok and nav.get_bt(bt_data)
-    ok = ok and driver.give_command(nav.find_commands(), LOOP_DURATION)
+    ok = ok and driver.give_commands(nav.find_commands(driver.get_command_count()))
     
     
     bt_data = btserver.wait_for_data() # no code after this point!
