@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 
 class State:
-#TODO: more general function assignment
 
     def __init__(self, name):
         self.__next = {}
