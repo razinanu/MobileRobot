@@ -20,13 +20,13 @@ class Driver:
         self.__right = ev3.Motor('outB')
         self.__gripper = ev3.Motor('outC')
         self.__loop_duration = loop_duration * 1000.0
-        self.__standard_speed = 0.75
+        self.__standard_speed = 75
         
         self.__orders = []
     
     def move(self):
         if len(self.__orders) == 0:
-            return
+            return True
         
         move_direction, move_duration, speed_l, speed_r = self.__current_order()
         
@@ -54,12 +54,17 @@ class Driver:
         if len(self.__orders) == 0:
             return Direction.STOP, self.__loop_duration, 0,0
         
+        if len(self.__orders) > 1 and \
+            self.__orders[0][0] != Direction.STOP and \
+            self.__orders[0][1] == 0:     # delete endless order, if new one came in
+            
+            self.__orders.pop(0)
         
         move_direction = self.__orders[0][0]
         move_duration = self.__orders[0][1]
         left = self.__orders[0][2]
         right = self.__orders[0][3]
-        
+                
         if move_duration == 0 and move_direction != Direction.STOP:
             return move_direction, self.__loop_duration, left, right
         
