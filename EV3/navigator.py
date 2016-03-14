@@ -12,20 +12,20 @@ class order:
         return (Direction.STOP, duration)
     
     @staticmethod
-    def straight(duration=0):
-        return (Direction.STRAIGHT, duration)
+    def straight(duration=0, speed_left=Direction.standard_speed, speed_right=Direction.standard_speed):
+        return (Direction.STRAIGHT, duration, speed_left, speed_right)
     
     @staticmethod
-    def reverse(duration=0):
-        return (Direction.REVERSE, duration)
+    def reverse(duration=0, speed_left=Direction.standard_speed, speed_right=Direction.standard_speed):
+        return (Direction.REVERSE, duration, speed_left, speed_right)
 
     @staticmethod
-    def left(duration=0):
-        return (Direction.LEFT, duration)
+    def left(duration=0, speed_left=Direction.standard_speed, speed_right=Direction.standard_speed):
+        return (Direction.LEFT, duration, speed_left, speed_right)
     
     @staticmethod
-    def right(duration=0):
-        return (Direction.RIGHT, duration)
+    def right(duration=0, speed_left=Direction.standard_speed, speed_right=Direction.standard_speed):
+        return (Direction.RIGHT, duration, speed_left, speed_right)
     
     @staticmethod
     def open():
@@ -57,7 +57,7 @@ class Navigator:
         self.__mach.assign_function (State.REGAIN,      self.__regain)
             
     def find_commands(self, queue_size):
-        orders, transition = self.__mach.execute_functions(self.__line_data, self.__bt_data)
+        orders, transition = self.__mach.execute_functions(self.__line_data, self.__bt_data, queue_size)
         
         if transition != 0:
             if not self.__mach.transition(transition):
@@ -78,7 +78,7 @@ class Navigator:
         return 0
     
     
-    def __search(self, line_data, bt_data):
+    def __search(self, line_data, bt_data, queue_size):
         # 1.) hit line --> turn
         if self.__line_data:
             return order.stop(), Transition.LINE
@@ -90,7 +90,7 @@ class Navigator:
         # 3.) drive straight
         return order.drive()
 
-    def __approach(self, line_data, bt_data):
+    def __approach(self, line_data, bt_data, queue_size):
         # 1.) hit line --> turn. Should not happen in convex field
         if self.__line_data:
             return order.stop(), Transition.LINE
@@ -101,7 +101,7 @@ class Navigator:
         
         return order.stop(), 0
     
-    def __grab(self, line_data, bt_data):
+    def __grab(self, line_data, bt_data, queue_size):
         """close gripper, check for success and color"""
         
         # close gripper
@@ -110,7 +110,7 @@ class Navigator:
         
         return order.stop(), 0
     
-    def __find_site(self, line_data, bt_data):
+    def __find_site(self, line_data, bt_data, queue_size):
         """move randomly until line or site is found"""
         
         # move rand
@@ -119,7 +119,7 @@ class Navigator:
         
         return order.stop(), 0
     
-    def __follow_line(self, line_data, bt_data):
+    def __follow_line(self, line_data, bt_data, queue_size):
         """follow line"""
         
         # stay on line
@@ -129,6 +129,7 @@ class Navigator:
     
     def __release(self, line_data, bt_data):
         """open gripper"""
+    def __release(self, line_data, bt_data, queue_size):
         
         # open gripper
         # if open --> success (what about turning and facing the field again? Done in "Search", because site is seen as line?)
@@ -144,6 +145,7 @@ class Navigator:
         return order.stop(), 0
     
     def __regain(self, line_data, bt_data):
+    def __regain(self, line_data, bt_data, queue_size):
         """ wiggle around on position to find a lost object."""
         
         # stand still for short time. wiggle around.

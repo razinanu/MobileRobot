@@ -12,6 +12,8 @@ class Direction:
     
     OPEN = 'open'
     CLOSE = 'close'
+    
+    standard_speed = 75
 
 class Driver:
     
@@ -20,7 +22,6 @@ class Driver:
         self.__right = ev3.Motor('outB')
         self.__gripper = ev3.Motor('outC')
         self.__loop_duration = loop_duration * 1000.0
-        self.__standard_speed = 75
         
         self.__orders = []
     
@@ -116,8 +117,8 @@ class Driver:
             speed_l = order[2]
             speed_r = order[3]
         else:
-            speed_l = self.__standard_speed
-            speed_r = self.__standard_speed
+            speed_l = Direction.standard_speed
+            speed_r = Direction.standard_speed
             
         self.__orders.append((direction, duration, speed_l, speed_r))
         
