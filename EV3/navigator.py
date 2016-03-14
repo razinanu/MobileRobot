@@ -101,15 +101,6 @@ class Navigator:
         
         return order.stop(), 0
     
-    def __grab(self, line_data, bt_data, queue_size):
-        """close gripper, check for success and color"""
-        
-        # close gripper
-        # if closed and ball in front of sensor --> success
-        # if closed and nothing in front of sensor --> fail
-        
-        return order.stop(), 0
-    
     def __find_site(self, line_data, bt_data, queue_size):
         """move randomly until line or site is found"""
         
@@ -127,24 +118,33 @@ class Navigator:
         
         return order.stop(), 0
     
-    def __release(self, line_data, bt_data):
-        """open gripper"""
-    def __release(self, line_data, bt_data, queue_size):
+    def __evasion(self, line_data, bt_data, queue_size):
+        """ return the way you came and turn. when finished, Transition.SUCCESS"""
         
-        # open gripper
-        # if open --> success (what about turning and facing the field again? Done in "Search", because site is seen as line?)
+        return [order.reverse(500), order.reverse(500, 0, 50), order.stop()], Transition.SUCCESS
         
-        return order.stop(), 0
-            
-    def __evasion(self, line_data, bt_data):
-        """ return the way you came and turn. when finished, Transition.FAIL"""
+    def __grab(self, line_data, bt_data, queue_size):
+        """close gripper, check for success and color"""
         
-        # drive backwards and turn
-        # if finished --> success
+        # close gripper
+        # if closed and ball in front of sensor --> success
+        # if closed and nothing in front of sensor --> fail
         
         return order.stop(), 0
     
-    def __regain(self, line_data, bt_data):
+    def __release(self, line_data, bt_data, queue_size):
+        """ open gripper, drive a little backwards, transition to next state.
+        
+        Transition will be done immediately. But since timed orders cannot be overwritten, they are going to be 
+        followed even in the next state.
+        
+        TODO: What about turning and facing the field again? Should be done in "Search", because the line sensor alarms.
+        """
+        
+        # gives orders and goes directly to next state --> orders will be obeyed in other state too, next orders cannot overwrite them
+        return [order.open(), order.reverse(500), order.stop()], Transition.SUCCESS 
+            
+
     def __regain(self, line_data, bt_data, queue_size):
         """ wiggle around on position to find a lost object."""
         
