@@ -20,23 +20,24 @@ class Driver:
         self.__right = ev3.Motor('outB')
         self.__gripper = ev3.Motor('outC')
         self.__loop_duration = loop_duration * 1000.0
+        self.__standard_speed = 0.75
         
-        self.__orders = [(Direction.STRAIGHT, 0),]
+        self.__orders = []
     
     def move(self):
         if len(self.__orders) == 0:
             return
         
-        move_direction, move_duration = self.__current_order()
+        move_direction, move_duration, speed_l, speed_r = self.__current_order()
         
         if move_direction == Direction.STRAIGHT:
-            self.__drive_straight(move_duration, 'normal')
+            self.__drive_straight(move_duration, 'normal', speed_l, speed_r)
         elif move_direction == Direction.REVERSE:
-            self.__drive_straight(move_duration, 'inversed')
+            self.__drive_straight(move_duration, 'inversed', speed_l, speed_r)
         elif move_direction == Direction.LEFT:
-            self.__turn(move_duration, True)
+            self.__turn(move_duration, True, speed_l, speed_r)
         elif move_direction == Direction.RIGHT:
-            self.__turn(move_duration, False)
+            self.__turn(move_duration, False, speed_l, speed_r)
         elif move_direction == Direction.STOP:
             self.__stop_movement()
         elif move_direction == Direction.OPEN:
@@ -50,22 +51,31 @@ class Driver:
         return True
     
     def __current_order(self):
+        if len(self.__orders) == 0:
+            return Direction.STOP, self.__loop_duration, 0,0
+        
+        
         move_direction = self.__orders[0][0]
         move_duration = self.__orders[0][1]
+        left = self.__orders[0][2]
+        right = self.__orders[0][3]
+        
+        if move_duration == 0 and move_direction != Direction.STOP:
+            return move_direction, self.__loop_duration, left, right
         
         if move_duration > self.__loop_duration:
             dur = self.__loop_duration
         else:
             dur = move_duration
-        
+            
         move_duration -= dur
         
         if move_duration > 0:
-            self.__orders[0] = (move_direction, move_duration)
+            self.__orders[0] = (move_direction, move_duration, left, right)
         else:
             self.__orders.pop(0)
         
-        return move_direction, dur
+        return move_direction, dur, left, right
             
     def give_commands(self, orders):
         """ Use this command to control the robot.
@@ -78,52 +88,59 @@ class Driver:
         if isinstance(orders, list):
             r = True
             for order in orders:
-                r = r and self.__give_command(order[0], order[1])
+                r = r and self.__give_command(order)
             return r
         else:
-            return self.__give_command(orders[0], orders[1])
+            return self.__give_command(orders)
             
-    def __give_command(self, direction, duration):
+    def __give_command(self, order):
+        
+        direction = order[0]
+        duration = order[1]
         
         if duration < 0:
             return True
         
-        if direction not in [Direction.STRAIGHT, Direction.REVERSE, Direction.LEFT, Direction.RIGHT, Direction.STOP, Direction.OPEN, Direction.CLOSE]:
+        if direction not in [Direction.STRAIGHT, Direction.REVERSE, \
+                             Direction.LEFT, Direction.RIGHT, Direction.STOP, \
+                             Direction.OPEN, Direction.CLOSE]:
             print "ERROR! Given direction was not understood. (", direction, ")"
             return False
         
-        # never deleting?
-#         if duration == 0:
-#             del self.__orders[:]
-        
-        self.__orders.append((direction, duration))
+        if len(order) == 4:     # Custom speed
+            speed_l = order[2]
+            speed_r = order[3]
+        else:
+            speed_l = self.__standard_speed
+            speed_r = self.__standard_speed
+            
+        self.__orders.append((direction, duration, speed_l, speed_r))
         
         return True
     
     def get_command_count(self):
-        #TODO: queue of orders
-        return 0
+        return len(self.__orders)
         
-    def __drive_straight(self, duration, direction):
+    def __drive_straight(self, duration, direction, speed_l, speed_r):
         """
         duration in ms
         """
         
-        self.__left.run_timed(time_sp=duration, polarity=direction, duty_cycle_sp=75)
-        self.__right.run_timed(time_sp=duration, polarity=direction, duty_cycle_sp=75)
+        self.__left.run_timed(time_sp=duration, polarity=direction, duty_cycle_sp=speed_l)
+        self.__right.run_timed(time_sp=duration, polarity=direction, duty_cycle_sp=speed_r)
         
-    def __turn(self, duration, turn_left):
+    def __turn(self, duration, turn_left, speed_l, speed_r):
         """
         duration in ms
         turn_left = true --> left, else right
         """
         
         if turn_left:
-            self.__left.run_timed(time_sp=duration, duty_cycle_sp=75, polarity='inversed')
-            self.__right.run_timed(time_sp=duration, duty_cycle_sp=75, polarity='normal')
+            self.__left.run_timed(time_sp=duration, duty_cycle_sp=speed_l, polarity='inversed')
+            self.__right.run_timed(time_sp=duration, duty_cycle_sp=speed_r, polarity='normal')
         else:
-            self.__left.run_timed(time_sp=duration, duty_cycle_sp=75, polarity='normal')
-            self.__right.run_timed(time_sp=duration, duty_cycle_sp=75, polarity='inversed')
+            self.__left.run_timed(time_sp=duration, duty_cycle_sp=speed_l, polarity='normal')
+            self.__right.run_timed(time_sp=duration, duty_cycle_sp=speed_r, polarity='inversed')
      
     def __stop_movement(self):
         """ stop all movement """
