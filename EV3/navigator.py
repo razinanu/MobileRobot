@@ -28,6 +28,20 @@ class order:
         return (Direction.RIGHT, duration, speed_left, speed_right)
     
     @staticmethod
+    def move(duration=0, speed_left=Direction.standard_speed, speed_right=Direction.standard_speed):
+        if speed_left >= 0 and speed_right >= 0:
+            return order.straight(duration, speed_left, speed_right)
+        
+        if speed_left < 0 and speed_right >= 0:
+            return order.left(duration, -speed_left, speed_right)
+        
+        if speed_left >= 0 and speed_right < 0:
+            return order.right(duration, speed_left, -speed_right)
+        
+        if speed_left < 0 and speed_right < 0:
+            return order.reverse(duration, -speed_left, -speed_right)
+    
+    @staticmethod
     def open():
         return (Direction.OPEN, 500)
     
