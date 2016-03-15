@@ -105,15 +105,35 @@ class Navigator:
         return order.drive()
 
     def __approach(self, line_data, bt_data, queue_size):
+        """ approach an object.
+        
+        If found --> success.
+        If lost --> fail.
+        If seen --> approach further, using a p-controller.
+        """
+        
         # 1.) hit line --> turn. Should not happen in convex field
         if self.__line_data:
             return order.stop(), Transition.LINE
         
-        # if found --> success
-        # if seen --> approach further
-        # if lost --> fail
+        x,y = 0,0   #TODO: extract position of object out of bt_data. x front, y left
         
-        return order.stop(), 0
+        if x < 0.5: #TODO: on bottom part of image
+            self.__is_near = True
+        
+        if not_seen and self.__is_near:
+            return order.stop(), Transition.SUCCESS
+        
+        if not_seen and not self.__is_near:
+            return order.stop(), Transition.FAIL
+
+        # p controller
+        P = 1   # some proportional factor
+        left = Direction.standard_speed - y*P
+        right = Direction.standard_speed + y*P
+        
+        #assumption: left, right > 0. Else
+        return order.move(speed_left = left, speed_right = right), 0
     
     def __find_site(self, line_data, bt_data, queue_size):
         """move randomly until line or site is found"""
