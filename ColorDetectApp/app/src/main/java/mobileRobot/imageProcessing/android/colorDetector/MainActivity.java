@@ -10,14 +10,16 @@ import org.opencv.android.CameraBridgeViewBase;
 import org.opencv.android.LoaderCallbackInterface;
 import org.opencv.android.OpenCVLoader;
 import org.opencv.core.Mat;
+import org.opencv.imgproc.Imgproc;
+
 import android.bluetooth.BluetoothSocket;
 
 public class MainActivity extends Activity implements CameraBridgeViewBase.CvCameraViewListener2 {
     private static final String TAG = "OCVSample::Activity";
 
     private CameraBridgeViewBase mOpenCvCameraView;
-    private BTClient btclient;
-    private BluetoothSocket btconnection;
+    /*private BTClient btclient;
+    private BluetoothSocket btconnection;*/
 
     private BaseLoaderCallback mLoaderCallback = new BaseLoaderCallback(this) {
         @Override
@@ -51,9 +53,9 @@ public class MainActivity extends Activity implements CameraBridgeViewBase.CvCam
         mOpenCvCameraView.setVisibility(SurfaceView.VISIBLE);
         mOpenCvCameraView.setCvCameraViewListener(this);
 
-        btclient = new BTClient();
+        /*btclient = new BTClient();
         startActivityForResult(btclient.startBT(), 0);
-        btconnection = btclient.connect();
+        btconnection = btclient.connect();*/
     }
 
     @Override
@@ -66,7 +68,7 @@ public class MainActivity extends Activity implements CameraBridgeViewBase.CvCam
     public void onResume() {
         super.onResume();
 
-        btclient.send(btconnection, "hello robot!");
+       // btclient.send(btconnection, "hello robot!");
 
         if (!OpenCVLoader.initDebug()) {
             Log.d(TAG, "Internal OpenCV library not found. Using OpenCV Manager for initialization");
@@ -95,9 +97,21 @@ public class MainActivity extends Activity implements CameraBridgeViewBase.CvCam
 
     public Mat onCameraFrame(CameraBridgeViewBase.CvCameraViewFrame inputFrame) {
         Mat matGray = inputFrame.gray();
-        salt(matGray.getNativeObjAddr(), 2000);
-        return matGray;
+        Mat matRGBA = inputFrame.rgba();
+
+        salt(matGray.getNativeObjAddr(), matRGBA.getNativeObjAddr(), 2000);
+        return matRGBA;
     }
 
-    public native void salt(long matAddrGray, int nbrElem);
+    public native void salt(long matAddrGray, long matAddRGBA,int nbrElem);
+
+//        Mat matGRY = inputFrame.gray();
+//        Mat matRGBA = inputFrame.rgba();
+//        Mat imgHSV= new Mat();
+//        Imgproc.cvtColor(matRGBA, imgHSV, Imgproc.COLOR_RGB2HSV); //Convert the captured frame from BGR to HSV
+//        salt(matGRY.getNativeObjAddr(), matRGBA.getNativeObjAddr(),imgHSV.getNativeObjAddr());
+//        return matGRY;
+//    }
+//
+//    public native void salt(long matAddGRY,long matAddRGBA ,long matAddHSV);
 }
