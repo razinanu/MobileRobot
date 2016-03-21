@@ -43,11 +43,11 @@ class order:
     
     @staticmethod
     def open():
-        return (Direction.OPEN, 500)
+        return (Direction.OPEN, 900)
     
     @staticmethod
     def close():
-        return (Direction.CLOSE, 500)
+        return (Direction.CLOSE, 900)
     
     @staticmethod
     def keep_going():
@@ -58,6 +58,7 @@ class Navigator:
     def __init__(self):
         self.__bt_data = 0
         self.__line_data = 0
+        self.__is_near = False
         
         self.__mach = EV3StateMachine()
         
@@ -71,8 +72,9 @@ class Navigator:
         self.__mach.assign_function (State.REGAIN,      self.__regain)
             
     def find_commands(self, queue_size):
+        print self.__mach.current().name()
         orders, transition = self.__mach.execute_functions(self.__line_data, self.__bt_data, queue_size)
-        
+
         if transition != 0:
             if not self.__mach.transition(transition):
                 return False, 0
@@ -88,8 +90,11 @@ class Navigator:
         self.__line_data = data # assumption: bool. TODO: handle differently; to allow distinction between sites and lines.
         #TODO get directly from sensor
     
-    def __nearest_obstacle(self, line_data, bt_data):
-        return 0
+    def __nearest_obstacle(self, bt_data):
+        if len(bt_data) == 0:
+            return 0,0
+        else:
+            return bt_data[0]
     
     
     def __search(self, line_data, bt_data, queue_size):
@@ -102,7 +107,7 @@ class Navigator:
             return order.stop(), Transition.SUCCESS
         
         # 3.) drive straight
-        return order.drive()
+        return order.move(), 0
 
     def __approach(self, line_data, bt_data, queue_size):
         """ approach an object.
@@ -116,22 +121,27 @@ class Navigator:
         if self.__line_data:
             return order.stop(), Transition.LINE
         
-        x,y = 0,0   #TODO: extract position of object out of bt_data. x front, y left
+        obstacle = self.__nearest_obstacle(bt_data)
         
-        if x < 0.5: #TODO: on bottom part of image
+        seen = obstacle != 0
+        
+        if not seen:
+            if self.__is_near:
+                return order.stop(), Transition.SUCCESS
+            else:
+                return order.stop(), Transition.FAIL
+
+        x = obstacle[1]
+        y = obstacle[2]
+
+        if x < 0.5:
             self.__is_near = True
         
-        if not_seen and self.__is_near:
-            return order.stop(), Transition.SUCCESS
-        
-        if not_seen and not self.__is_near:
-            return order.stop(), Transition.FAIL
-
         # p controller
         P = 1   # some proportional factor
         left = Direction.standard_speed - y*P
         right = Direction.standard_speed + y*P
-        
+         
         #assumption: left, right > 0. Else
         return order.move(speed_left = left, speed_right = right), 0
     

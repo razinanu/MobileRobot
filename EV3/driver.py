@@ -30,7 +30,14 @@ class Driver:
             return True
         
         move_direction, move_duration, speed_l, speed_r = self.__current_order()
+        print move_direction, move_duration, speed_l, speed_r
         
+        while speed_l > 150 or speed_r > 150:   #TODO: make useful values out of large ones!
+            speed_l = 100
+            speed_r = 100
+        
+        
+                
         if move_direction == Direction.STRAIGHT:
             self.__drive_straight(move_duration, 'normal', speed_l, speed_r)
         elif move_direction == Direction.REVERSE:
@@ -54,13 +61,13 @@ class Driver:
     def __current_order(self):
         if len(self.__orders) == 0:
             return Direction.STOP, self.__loop_duration, 0,0
-        
+                
         if len(self.__orders) > 1 and \
             self.__orders[0][0] != Direction.STOP and \
             self.__orders[0][1] == 0:     # delete endless order, if new one came in
             
             self.__orders.pop(0)
-        
+                
         move_direction = self.__orders[0][0]
         move_duration = self.__orders[0][1]
         left = self.__orders[0][2]
@@ -155,6 +162,6 @@ class Driver:
     
     def __move_gripper(self, duration, should_open):
         if should_open:
-            self.__gripper.run_timed(time_sp=duration, polarity='normal', duty_cycle_sp=50)
-        else:
             self.__gripper.run_timed(time_sp=duration, polarity='inversed', duty_cycle_sp=50)
+        else:
+            self.__gripper.run_timed(time_sp=duration, polarity='normal', duty_cycle_sp=50)
