@@ -21,7 +21,9 @@ class Driver:
         self.__left = ev3.Motor('outA')
         self.__right = ev3.Motor('outB')
         self.__gripper = ev3.Motor('outC')
+        
         self.__loop_duration = loop_duration * 1000.0
+        self.__MAX_SPEED = 100
         
         self.__orders = []
     
@@ -32,12 +34,8 @@ class Driver:
         move_direction, move_duration, speed_l, speed_r = self.__current_order()
         print move_direction, move_duration, speed_l, speed_r
         
-        while speed_l > 150 or speed_r > 150:   #TODO: make useful values out of large ones!
-            speed_l = 100
-            speed_r = 100
-        
-        
-                
+        speed_l, speed_r = self.__correct_speed(speed_l, speed_r)
+             
         if move_direction == Direction.STRAIGHT:
             self.__drive_straight(move_duration, 'normal', speed_l, speed_r)
         elif move_direction == Direction.REVERSE:
@@ -57,6 +55,34 @@ class Driver:
             return False
         
         return True
+    
+    def __correct_speed(self, l, r):
+        
+        if abs(l-r) > 2*self.__MAX_SPEED:
+            l = self.__MAX_SPEED*l/l
+            r = self.__MAX_SPEED*r/r
+            
+        if l > self.__MAX_SPEED:
+            r -= l-self.__MAX_SPEED
+            l = self.__MAX_SPEED
+        if r > self.__MAX_SPEED:
+            l -= r-self.__MAX_SPEED
+            r = self.__MAX_SPEED
+        
+        if l < -self.__MAX_SPEED:
+            r-= l+self.__MAX_SPEED
+            l = -self.__MAX_SPEED
+        if r < -self.__MAX_SPEED:
+            l -= r+self.__MAX_SPEED
+            r = -self.__MAX_SPEED
+        
+        
+        if l > self.__MAX_SPEED or l < -self.__MAX_SPEED or r > self.__MAX_SPEED or r < -self.__MAX_SPEED:
+            print "ERROR! correction of speed value did not work."
+            l = 0
+            r = 0
+        
+        return l,r
     
     def __current_order(self):
         if len(self.__orders) == 0:
