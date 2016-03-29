@@ -5,6 +5,8 @@ from ev3_statemachine import EV3StateMachine
 from ev3_statemachine import State
 from ev3_statemachine import Transition
 from driver import Direction
+import time
+import ev3dev.ev3 as ev3
 
 class order:
     @staticmethod
@@ -61,6 +63,13 @@ class Navigator:
         self.__is_near = False
         
         self.__mach = EV3StateMachine()
+        self.__lastChange = time.time()
+        
+        self.__ground = ev3.Sensor('in2')
+        self.__gripper = ev3.ColorSensor('in1')
+        
+        self.__ground.mode = 'COL-COLOR'
+        self.__gripper.mode = 'COL-COLOR'
         
         self.__mach.assign_function (State.SEARCH,      self.__search)
         self.__mach.assign_function (State.APPROACH,    self.__approach)
@@ -111,9 +120,16 @@ class Navigator:
     
     def __search(self, line_data, bt_data, queue_size):
         # 1.) hit line --> turn
-        if self.__line_data:
-            return order.stop(), Transition.LINE
+        if (self.__ground.value() == 1) and (self.__lastChange + 2 < time.time()):
+            self.__lastChange = time.time() #Drehen in Auftrag geben
+            return order.left(), 0
         
+        elif (self.__lastChange + 1 > time.time()):
+            return order.left(), 0    #Drehung ausführen
+        
+        elif (self.__lastChange + 2 > time.time()):
+            return order.move(), 0    #ohne Sensor vorwärts fahren
+                
         # 2.) found obstacle
         if self.__nearest_obstacle(bt_data) != 0:
             return order.stop(), Transition.SUCCESS
