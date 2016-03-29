@@ -29,6 +29,10 @@ class State:
         self.__generic_functions[identifier] = function_name
 
     def execute_function(self, identifier, *params):
+        if identifier not in self.__generic_functions:
+            print "ERROR! This function was not defined! (State: ", self.__name, ", function: ", identifier, ")"
+            return 0
+        
         return self.__generic_functions[identifier](*params)
 
 class StateMachine:

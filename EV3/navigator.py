@@ -68,16 +68,28 @@ class Navigator:
         self.__mach.assign_function (State.RETRIEVE,    self.__find_site)
         self.__mach.assign_function (State.LINE,        self.__follow_line)
         self.__mach.assign_function (State.RELEASE,     self.__release)
-        self.__mach.assign_function (State.EVASION,       self.__evasion)
+        self.__mach.assign_function (State.EVASION,     self.__evasion)
         self.__mach.assign_function (State.REGAIN,      self.__regain)
-            
+        
+        self.__mach.assign_transition_function (State.SEARCH,      self.__start_search)
+        self.__mach.assign_transition_function (State.APPROACH,    self.__start_approach)
+        self.__mach.assign_transition_function (State.GRAB,        self.__start_grab)
+        self.__mach.assign_transition_function (State.RETRIEVE,    self.__start_retrieve)
+        self.__mach.assign_transition_function (State.LINE,        self.__start_line)
+        self.__mach.assign_transition_function (State.RELEASE,     self.__start_release)
+        self.__mach.assign_transition_function (State.EVASION,     self.__start_evasion)
+        self.__mach.assign_transition_function (State.REGAIN,      self.__start_regain) 
+               
     def find_commands(self, queue_size):
         print self.__mach.current().name()
         orders, transition = self.__mach.execute_functions(self.__line_data, self.__bt_data, queue_size)
 
         if transition != 0:
-            if not self.__mach.transition(transition):
+            trans_result = self.__mach.transition(transition)
+            if not trans_result:
                 return False, 0
+            else:
+                return trans_result
         
         return orders
     
@@ -197,3 +209,28 @@ class Navigator:
         # if sometimes in between object seen --> success
         
         return order.stop(), 0
+
+    
+    def __start_search(self):
+        return 0
+
+    def __start_approach(self):
+        return 0
+    
+    def __start_grab(self):
+        return 0
+    
+    def __start_retrieve(self):
+        return 0
+    
+    def __start_line(self):
+        return 0
+    
+    def __start_release(self):
+        return 0
+    
+    def __start_evasion(self):
+        return 0
+    
+    def __start_regain(self):
+        return 0

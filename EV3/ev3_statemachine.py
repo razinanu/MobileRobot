@@ -64,6 +64,16 @@ class EV3StateMachine(StateMachine):
     def assign_function(self, state_identifier, function_identifier):
         self.assign_generic_function(state_identifier, "command", function_identifier)
     
+    def assign_transition_function(self, state_identifier, function_identifier):
+        self.assign_generic_function(state_identifier, "transition", function_identifier)
+    
+    def transition(self, transition):
+        success = StateMachine.transition(self, transition)
+        if not success:
+            return False
+        
+        return self.current().execute_function("transition")    
+    
     def execute_functions(self, line_data, bt_data, queue_size):
         return self.current().execute_function("command", line_data, bt_data, queue_size)
         
