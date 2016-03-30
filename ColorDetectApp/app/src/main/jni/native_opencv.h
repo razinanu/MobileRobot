@@ -10,12 +10,13 @@
 #include "opencv2/imgproc/imgproc.hpp"
 
 
+
 extern "C" {
-JNIEXPORT void Java_mobileRobot_imageProcessing_android_colorDetector_MainActivity_salt(
+
+JNIEXPORT int JNICALL Java_mobileRobot_imageProcessing_android_colorDetector_MainActivity_salt(
         JNIEnv *env, jobject instance,
         jlong matAddrGray,
-        jlong matAddrRGBA,
-        jint nbrElem) ;
+        jlong matAddrRGBA);
 
 }
 #endif //MOBILEROBOT_IMAGEPROCESSING_ANDROID_COLORDETECTOR_H
