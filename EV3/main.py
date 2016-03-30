@@ -73,6 +73,8 @@ bt_data = 0
 
 print "Welcome!"
 
+
+
 # print "Waiting for bluetooth connection..."
 # btserver = RFCOMMServer()
 # btserver.wait_for_connection()

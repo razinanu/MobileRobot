@@ -57,6 +57,13 @@ class order:
     
 class Navigator:
 
+    YLL = 200
+    YL = 500
+    YR = 700
+    YRR = 1080
+    XU = 540
+    MITTE = 640
+
     def __init__(self):
         self.__bt_data = 0
         self.__line_data = 0
@@ -73,6 +80,9 @@ class Navigator:
         
         self.__ground.mode = 'COL-COLOR'
         self.__gripper.mode = 'COL-COLOR'
+        self.__gripperOpen = True
+        self.__redBallInGripper = False
+        self.__blueBallInGripper = False
         
         self.__mach.assign_function (State.SEARCH,      self.__search)
         self.__mach.assign_function (State.APPROACH,    self.__approach)
@@ -118,7 +128,7 @@ class Navigator:
         else:
             return bt_data[0]
     
-    
+    # Suchen 
     def __search(self, line_data, bt_data, queue_size):
         # 1.) hit line --> turn
         
@@ -146,41 +156,56 @@ class Navigator:
         print "normal fahren"
         return order.move(), 0
 
+    #Annähern
     def __approach(self, line_data, bt_data, queue_size):
-        """ approach an object.
+    
+        # Linie behandeln
+        if (self.__ground.value() == 1) and (self.__lastChange + 3 < time.time()):
+            self.__lastChange = time.time() #Drehen in Auftrag geben
+            return order.left(), 0
         
-        If found --> success.
-        If lost --> fail.
-        If seen --> approach further, using a p-controller.
-        """
+        elif (self.__lastChange + 1 > time.time()):
+            print "drehen"
+            return order.left(0,70,70), 0    #Drehung ausführen
         
-        # 1.) hit line --> turn. Should not happen in convex field
-        if self.__line_data:
-            return order.stop(), Transition.LINE
+        elif (self.__lastChange + 3 > time.time()):
+            print "korrektur"
+            return order.move(0,50,47), 0    #ohne Sensor vorwärts fahren
         
-        obstacle = self.__nearest_obstacle(bt_data)
+        # Objekte suchen
+        bt_data = [[9,2,3],[4,5,6],[7,8,9]]
+        i = 0
+        smallestX = 0, i
+        for i, val in enumerate(bt_data):
+            if val[0] > smallestX[0]:                           # ist der Ball näher am Roboter?
+                if val[2] != 2:                                 # hat der Ball die richtige Farbe?
+                    smallestX = val[0], val[1], val[2]
+                elif smallestX[1] > YLL and smallestX[1] < YRR:   # liegt der andersfarbige Ball im Kollisionsbereich?
+                    smallestX = val[0], val[1], val[2]
+              
+        print "annaehren", smallestX[0], smallestX[1]
         
-        seen = obstacle != 0
+        if smallestX[2] == "X":
+            print "in Modus Ausweichen wechseln"
+            return order.stop(), Transition.LINE                #in Ausweichen wechseln
         
-        if not seen:
-            if self.__is_near:
-                return order.stop(), Transition.SUCCESS
+        if smallestX[1] > YL and smallestX[1] < YR:           # liegt der Ball mittig?
+            if smallestX[0] > XU:                              # liegt der mittige Ball im unteren Bildviertel?
+                print "in Modus vorfahren und Greifen wechseln"    
+                self.__lastChange = time.time()                        
+                return order.stop(), Transition.SUCCESS         # Ball liegt richtig; in Vorfahren und Greifen wechseln
             else:
-                return order.stop(), Transition.FAIL
-
-        x = obstacle[1]
-        y = obstacle[2]
-
-        if x < 0.5:
-            self.__is_near = True
+                return order.move(0,50,47), 0                   # stück nach vorne fahren
+            
+        else:
+            if smallestX[1] < MITTE:
+                return order.left(0,70,70), 0                   # links drehen
+            else: 
+                return order.right(0,70,70), 0                  # rechts drehen
+            
         
-        # p controller
-        P = 1   # some proportional factor
-        left = Direction.standard_speed - y*P
-        right = Direction.standard_speed + y*P
-         
-        #assumption: left, right > 0. Else
-        return order.move(speed_left = left, speed_right = right), 0
+        
+    
     
     def __find_site(self, line_data, bt_data, queue_size):
         """move randomly until line or site is found"""
@@ -201,16 +226,84 @@ class Navigator:
     
     def __evasion(self, line_data, bt_data, queue_size):
         """ return the way you came and turn. when finished, Transition.SUCCESS"""
+
+        # Linie behandeln
+        if (self.__ground.value() == 1) and (self.__lastChange + 3 < time.time()):
+            self.__lastChange = time.time() #Drehen in Auftrag geben
+            return order.left(), 0
         
-        return [order.reverse(500), order.reverse(500, 0, 50), order.stop()], Transition.SUCCESS
+        elif (self.__lastChange + 1 > time.time()):
+            print "drehen"
+            return order.left(0,70,70), 0    #Drehung ausführen
+        
+        elif (self.__lastChange + 3 > time.time()):
+            print "korrektur"
+            return order.move(0,50,47), 0    #ohne Sensor vorwärts fahren
+        
+        # wenn kein feindlicher Ball mehr gesehen wird, für 2 Sekunden geradeaus fahren
+        if self.__lastChange + 2 > time.time():
+            return order.move(0,50,47), 0
+        
+        # Objekte suchen
+        bt_data = [[9,2,3],[4,5,6],[7,8,9]]
+        i = 0
+        smallestX = 0, 0, 0
+        for i, val in enumerate(bt_data):
+            if val[0] > smallestX[0]:                           # ist der Ball näher am Roboter?
+                if val[2] != 2:                                 # hat der Ball die richtige Farbe?
+                    smallestX = val[0], val[1], val[2]
+                elif smallestX[1] > YLL and smallestX[1] < YRR:   # liegt der andersfarbige Ball im Kollisionsbereich?
+                    smallestX = val[0], val[1], val[2]
+              
+        print "ausweichen", smallestX[0], smallestX[1]
+        
+        if smallestX[2] != 2:
+            print "in Modus Suchen wechseln"
+            return order.stop(), Transition.SUCCESS             #in Suchen wechseln
+        
+        if not (smallestX[1] > YL and smallestX[1] < YR):       # der Ball liegt nicht mehr im Kollisionsbereich?
+            self.__lastChange = time.time()
+            return order.move(0,50,47), 0                       # Stück geradeaus fahren  
+            
+        else:
+            if smallestX[1] > MITTE:
+                return order.left(0,70,70), 0                   # links drehen
+            else: 
+                return order.right(0,70,70), 0                  # rechts drehen        
+        
+        
+        #return [order.reverse(500), order.reverse(500, 0, 50), order.stop()], Transition.SUCCESS
         
     def __grab(self, line_data, bt_data, queue_size):
         """close gripper, check for success and color"""
         
+        # auf den Ball zu fahren; Zeit muss beim Moduswechsel auf aktuelle Zeit gesetzt werden!
+        if self.__lastChange + 1.5 > time.time():
+            return order.move(0,50,47), 0
+        
+        if self.__gripperOpen:
+            self.__gripperOpen = False
+            return order.close(), 0
+        
+        if not self.__gripperOpen:
+            if self.__gripper.value() == 2:
+                self.__blueBallInGripper = True
+                self.__redBallInGripper = False
+                return order.stop(), Transition.SUCCESS
+            elif self.__gripper.value() == 5:
+                self.__blueBallInGripper = False
+                self.__redBallInGripper = True  
+                return order.stop(), Transition.SUCCESS
+            else:
+                self.__blueBallInGripper = False
+                self.__redBallInGripper = False  
+                return order.stop(), Transition.FAIL            
+            
+        
         # close gripper
         # if closed and ball in front of sensor --> success
         # if closed and nothing in front of sensor --> fail
-        
+        print "das haette nie erreicht werden sollen 494373534p95voirelkd"
         return order.stop(), 0
     
     def __release(self, line_data, bt_data, queue_size):
