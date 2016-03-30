@@ -57,17 +57,19 @@ class order:
     
 class Navigator:
 
-    YLL = 200
-    YL = 500
-    YR = 700
-    YRR = 1080
-    XU = 540
-    MITTE = 640
+
 
     def __init__(self):
         self.__bt_data = 0
         self.__line_data = 0
         self.__is_near = False
+        
+        self.YLL = 200
+        self.YL = 500
+        self.YR = 700
+        self.YRR = 1080
+        self.XU = 540
+        self.MITTE = 640
         
         self.__mach = EV3StateMachine()
         self.__lastChange = time.time() - 100
@@ -91,6 +93,7 @@ class Navigator:
         self.__mach.assign_function (State.LINE,        self.__follow_line)
         self.__mach.assign_function (State.RELEASE,     self.__release)
         self.__mach.assign_function (State.EVASION,     self.__evasion)
+        self.__mach.assign_function (State.EVASION2,    self.__evasion2)
         self.__mach.assign_function (State.REGAIN,      self.__regain)
         
         self.__mach.assign_transition_function (State.SEARCH,      self.__start_search)
@@ -173,14 +176,19 @@ class Navigator:
             return order.move(0,50,47), 0    #ohne Sensor vorwärts fahren
         
         # Objekte suchen
+        if len(bt_data) == 0:
+            print "Ball verloren, in Suchen zurueck"
+            print bt_data
+            return order.stop(), Transition.FAIL 
+        
         bt_data = [[9,2,3],[4,5,6],[7,8,9]]
         i = 0
         smallestX = 0, i
         for i, val in enumerate(bt_data):
             if val[0] > smallestX[0]:                           # ist der Ball näher am Roboter?
-                if val[2] != 2:                                 # hat der Ball die richtige Farbe?
+                if val[2] != "X":                                 # hat der Ball die richtige Farbe?
                     smallestX = val[0], val[1], val[2]
-                elif smallestX[1] > YLL and smallestX[1] < YRR:   # liegt der andersfarbige Ball im Kollisionsbereich?
+                elif smallestX[1] > self.YLL and smallestX[1] < self.YRR:   # liegt der andersfarbige Ball im Kollisionsbereich?
                     smallestX = val[0], val[1], val[2]
               
         print "annaehren", smallestX[0], smallestX[1]
@@ -189,8 +197,8 @@ class Navigator:
             print "in Modus Ausweichen wechseln"
             return order.stop(), Transition.LINE                #in Ausweichen wechseln
         
-        if smallestX[1] > YL and smallestX[1] < YR:           # liegt der Ball mittig?
-            if smallestX[0] > XU:                              # liegt der mittige Ball im unteren Bildviertel?
+        if smallestX[1] > self.YL and smallestX[1] < self.YR:           # liegt der Ball mittig?
+            if smallestX[0] > self.XU:                              # liegt der mittige Ball im unteren Bildviertel?
                 print "in Modus vorfahren und Greifen wechseln"    
                 self.__lastChange = time.time()                        
                 return order.stop(), Transition.SUCCESS         # Ball liegt richtig; in Vorfahren und Greifen wechseln
@@ -198,17 +206,45 @@ class Navigator:
                 return order.move(0,50,47), 0                   # stück nach vorne fahren
             
         else:
-            if smallestX[1] < MITTE:
-                return order.left(0,70,70), 0                   # links drehen
+            if smallestX[1] < self.MITTE:
+                return order.left(0,50,50), 0                   # links drehen
             else: 
-                return order.right(0,70,70), 0                  # rechts drehen
+                return order.right(0,50,50), 0                  # rechts drehen
             
         
         
     
-    
+    # farbiges Feld finden
     def __find_site(self, line_data, bt_data, queue_size):
         """move randomly until line or site is found"""
+        
+        print "Farbe Boden:", self.__ground.value()
+        
+        if (self.__ground.value() == 1) and (self.__lastChange + 3 < time.time()):
+            self.__lastChange = time.time() #Drehen in Auftrag geben
+            return order.left(), 0
+        
+        elif (self.__lastChange + 1 > time.time()):
+            print "drehen"
+            return order.left(0,70,70), 0    #Drehung ausführen
+        
+        elif (self.__lastChange + 3 > time.time()):
+            print "korrektur"
+            return order.move(0,50,47), 0    #ohne Sensor vorwärts fahren
+             
+        # TODO Bällen ausweichen     
+           
+        # blaues Feld gefunden
+        if self.__ground.value() == 2 and self.__blueBallInGripper:
+            return order.stop(), Transition.SUCCESS
+        
+        # rotes Feld gefunden
+        if self.__ground.value() == 5 and self.__redBallInGripper:
+            return order.stop(), Transition.SUCCESS
+        
+        # 3.) drive straight
+        print "normal fahren"
+        return order.move(), 0
         
         # move rand
         # if line or wrong site --> line
@@ -224,6 +260,7 @@ class Navigator:
         
         return order.stop(), 0
     
+    # Ausweichen
     def __evasion(self, line_data, bt_data, queue_size):
         """ return the way you came and turn. when finished, Transition.SUCCESS"""
 
@@ -250,26 +287,70 @@ class Navigator:
         smallestX = 0, 0, 0
         for i, val in enumerate(bt_data):
             if val[0] > smallestX[0]:                           # ist der Ball näher am Roboter?
-                if val[2] != 2:                                 # hat der Ball die richtige Farbe?
+                if val[2] != "X":                                 # hat der Ball die richtige Farbe?
                     smallestX = val[0], val[1], val[2]
-                elif smallestX[1] > YLL and smallestX[1] < YRR:   # liegt der andersfarbige Ball im Kollisionsbereich?
+                elif smallestX[1] > self.YLL and smallestX[1] < self.YRR:   # liegt der andersfarbige Ball im Kollisionsbereich?
                     smallestX = val[0], val[1], val[2]
               
         print "ausweichen", smallestX[0], smallestX[1]
         
-        if smallestX[2] != 2:
+        if smallestX[2] != "X":
             print "in Modus Suchen wechseln"
             return order.stop(), Transition.SUCCESS             #in Suchen wechseln
         
-        if not (smallestX[1] > YL and smallestX[1] < YR):       # der Ball liegt nicht mehr im Kollisionsbereich?
+        if not (smallestX[1] > self.YL and smallestX[1] < self.YR):       # der Ball liegt nicht mehr im Kollisionsbereich?
             self.__lastChange = time.time()
             return order.move(0,50,47), 0                       # Stück geradeaus fahren  
             
         else:
-            if smallestX[1] > MITTE:
-                return order.left(0,70,70), 0                   # links drehen
+            if smallestX[1] > self.MITTE:
+                return order.left(0,50,50), 0                   # links drehen
             else: 
-                return order.right(0,70,70), 0                  # rechts drehen        
+                return order.right(0,50,50), 0                  # rechts drehen        
+        
+        
+        #return [order.reverse(500), order.reverse(500, 0, 50), order.stop()], Transition.SUCCESS
+    
+    # Ausweichen mit Ball
+    def __evasion2(self, line_data, bt_data, queue_size):
+        # Linie behandeln
+        if (self.__ground.value() == 1) and (self.__lastChange + 3 < time.time()):
+            self.__lastChange = time.time() #Drehen in Auftrag geben
+            return order.left(), 0
+        
+        elif (self.__lastChange + 1 > time.time()):
+            print "drehen"
+            return order.left(0,70,70), 0    #Drehung ausführen
+        
+        elif (self.__lastChange + 3 > time.time()):
+            print "korrektur"
+            return order.move(0,50,47), 0    #ohne Sensor vorwärts fahren
+        
+        if len(bt_data) == 0:
+            print "kein Ball mehr gesehen"
+            print bt_data
+            return order.stop(), Transition.SUCCESS 
+        
+        # Objekte suchen
+        bt_data = [[9,2,3],[4,5,6],[7,8,9]]
+        i = 0
+        smallestX = 0, 0, "A"
+        for i, val in enumerate(bt_data):
+            if val[0] > smallestX[0]:                           # ist der Ball näher am Roboter?
+                if smallestX[1] > self.YLL and smallestX[1] < self.YRR:   # liegt der andersfarbige Ball im Kollisionsbereich?
+                    if val[0] > XU:     # nur vor dem Ball ausweichen, wenn dieser vor dem Roboter liegt
+                        smallestX = val[0], val[1], val[2]
+              
+        print "ausweichen_2", smallestX[0], smallestX[1]
+        
+        if smallestX[2] == "A":
+            print "kein Ball direkt vor dem Roboter"
+            return order.stop(), Transition.SUCCESS 
+        
+        if smallestX[1] > self.MITTE:
+            return order.left(0,50,50), 0                   # links drehen
+        else: 
+            return order.right(0,50,50), 0                  # rechts drehen        
         
         
         #return [order.reverse(500), order.reverse(500, 0, 50), order.stop()], Transition.SUCCESS
@@ -306,7 +387,27 @@ class Navigator:
         print "das haette nie erreicht werden sollen 494373534p95voirelkd"
         return order.stop(), 0
     
+    # Ball freilassen
     def __release(self, line_data, bt_data, queue_size):
+        
+        if not self.__gripperOpen:
+            self.__gripperOpen = True
+            self.__lastChange = time.time()
+            return order.open(), 0
+        
+        if (self.__lastChange + 2 < time.time()):
+            return order.move(0,-50,-50), 0
+        
+        elif (self.__lastChange + 1 > time.time()):
+            print "zurueckfahren"
+            return order.move(0,-50,-47), 0    # zurückfahren
+        
+        elif (self.__lastChange + 2 > time.time()):
+            print "drehen"
+            return order.left(0,70,70), 0    #ohne Sensor vorwärts fahren
+        
+        return order.stop(), Transition.SUCCESS 
+        
         """ open gripper, drive a little backwards, transition to next state.
         
         Transition will be done immediately. But since timed orders cannot be overwritten, they are going to be 
@@ -316,7 +417,7 @@ class Navigator:
         """
         
         # gives orders and goes directly to next state --> orders will be obeyed in other state too, next orders cannot overwrite them
-        return [order.open(), order.reverse(500), order.stop()], Transition.SUCCESS 
+        'return [order.open(), order.reverse(500), order.stop()], Transition.SUCCESS '
             
 
     def __regain(self, line_data, bt_data, queue_size):

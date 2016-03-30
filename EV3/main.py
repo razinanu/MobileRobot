@@ -11,61 +11,31 @@ def parse(btstring):
     if btstring == 0:
         return []
     
-    objects = btstring.split(" ")
-    if objects[0] == '':
+    
+    objects = btstring.split("#")
+    if objects[0] == '':        #oder '0'
         return []
     
     object_list = []
     
     for o in objects:
         try:
-            one = parseOne(o)
+            if(o != ''):
+                one = parseOne(o)
         except ValueError as er:
-            print "###########################################"
-            print "###########################################"
-            print "ERROR! ", er, "(Message: ", o, ")"
-            print "###########################################"
-            print "###########################################"
-            object_list = []
-            one = parseOneFaultyElement(o)
-        
+            print("###########################################")
+            print("###########################################")
+            print("ERROR! ", er, "(Message: ", o, ")")
+            print("###########################################")
+            print("###########################################")
         object_list.append(one)
         
-    
     return object_list
 
-def parseRazi(btstring):
-    if btstring == "0":
-        return 0,0,0
-    else:
-        xs = btstring[0:3]
-        ys = btstring[3:7]
-        zs = btstring[7:8]
-        
-        x = int(xs)
-        y = int(ys)
-        z = int(zs)
-        return x,y,z
-        
-
 def parseOne(o):
-    elements = o.split("#")
-    
-    return (elements[0], int(elements[1]), int(elements[2]), int(elements[3]))
-
-def parseOneFaultyElement(o):
-    elements = o.split("#")
-    
-    color = ""
-    if "X" in elements[3]:
-        color = "X"
-    elif "B" in elements[3]:
-        color = "B"
-    elif "R" in elements[3]:
-        color = "R"
-        
-    return (color, int(elements[4]), int(elements[5]), int(elements[6]))
-    
+    elements = o.split("$")
+    return [int(elements[1]), int(elements[2]), elements[3]]
+  
 
 LOOP_DURATION = 0.1  # in s
 ok = True
@@ -73,17 +43,18 @@ bt_data = 0
 
 print "Welcome!"
 
-
-
-# print "Waiting for bluetooth connection..."
-# btserver = RFCOMMServer()
-# btserver.wait_for_connection()
-# print "Connected!"
+print "Waiting for bluetooth connection..."
+btserver = RFCOMMServer()
+btserver.wait_for_connection()
+print "Connected!"
 
 driver = Driver(LOOP_DURATION)
 nav = Navigator()
 
 driver.give_commands((Direction.STRAIGHT, 0))
+
+## TEST !!! ###
+#btstring = "$450$550$B#$10$10$B#$100$100$X#$20$20$R#"
 
 while ok:
     try:
@@ -91,14 +62,15 @@ while ok:
         ok = ok and driver.move()  #no code before this point!
         
         # TODO: here comes the other code
-        #ok = ok and nav.get_bt(parseRazi(bt_data))
-        ok = ok and nav.get_bt(parseRazi("12312342"))
+        ok = ok and nav.get_bt(parse(bt_data))
+#         ok = ok and nav.get_bt(parse(btstring))
         ok = ok and driver.give_commands(nav.find_commands(driver.get_command_count()))
     
         bt_data = btserver.wait_for_data() # no code after this point!
         
         end = time.time()
         remain = start + LOOP_DURATION - end
+        
         if remain > 0:
             time.sleep(remain)
     except KeyboardInterrupt:

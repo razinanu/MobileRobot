@@ -10,14 +10,19 @@ import org.opencv.android.CameraBridgeViewBase;
 import org.opencv.android.LoaderCallbackInterface;
 import org.opencv.android.OpenCVLoader;
 import org.opencv.core.Mat;
+import org.opencv.imgproc.Imgproc;
+
 import android.bluetooth.BluetoothSocket;
 
 public class MainActivity extends Activity implements CameraBridgeViewBase.CvCameraViewListener2 {
     private static final String TAG = "OCVSample::Activity";
 
     private CameraBridgeViewBase mOpenCvCameraView;
+
     private BTClient btclient;
     private BluetoothSocket btconnection;
+    private char[] coordinate;
+
 
     private BaseLoaderCallback mLoaderCallback = new BaseLoaderCallback(this) {
         @Override
@@ -66,7 +71,8 @@ public class MainActivity extends Activity implements CameraBridgeViewBase.CvCam
     public void onResume() {
         super.onResume();
 
-        btclient.send(btconnection, "hello robot!");
+        //ToDo btclient.send(btconnection, "B#1#2#4!");
+
 
         if (!OpenCVLoader.initDebug()) {
             Log.d(TAG, "Internal OpenCV library not found. Using OpenCV Manager for initialization");
@@ -95,9 +101,17 @@ public class MainActivity extends Activity implements CameraBridgeViewBase.CvCam
 
     public Mat onCameraFrame(CameraBridgeViewBase.CvCameraViewFrame inputFrame) {
         Mat matGray = inputFrame.gray();
-        salt(matGray.getNativeObjAddr(), 2000);
+        Mat matRGBA = inputFrame.rgba();
+        int ycoordinate = salt(matGray.getNativeObjAddr(), matRGBA.getNativeObjAddr());
+
+
+//        char stringTest = 'H';
+//        String coordinateString = Character.toString(stringTest);
+
+        btclient.send(btconnection,  new Integer(ycoordinate).toString());
         return matGray;
     }
 
-    public native void salt(long matAddrGray, int nbrElem);
+    public native int salt(long matAddrGray, long matAddRGBA);
+
 }
