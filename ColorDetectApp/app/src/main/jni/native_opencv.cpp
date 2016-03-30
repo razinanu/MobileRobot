@@ -39,10 +39,11 @@ JNIEXPORT int JNICALL Java_mobileRobot_imageProcessing_android_colorDetector_Mai
                  50, // Canny high threshold
                  30, // minimum number of votes
                  20, 100);
-    //string message = "no ball!";
-    int coordinate= 3111111;
-    int coordinateY =0;
-    int c =  imgGray.size().height;
+
+    int coordinate= 0;
+    int coordinateX =0;
+    //int c =  imgGray.size().height;
+    int c =  mRGBA.size().width;
     for(size_t i= 0; i< circles.size() ; i++){
         Mat mask(Mat::zeros(imgGray.rows, imgGray.cols, CV_8UC1));
         int radius = cvRound(circles[i][2]);
@@ -51,8 +52,9 @@ JNIEXPORT int JNICALL Java_mobileRobot_imageProcessing_android_colorDetector_Mai
                radius / 2, 1);
         if (mean(mask_blue,mask)[0] > 130){
             //blue ball
-//            coordinate [0] = 1;
-             int coordinateY  = cvRound(circles[i][0]);
+            coordinateX = cvRound(circles[i][1])*100000;
+            //coordinateY
+            //int coordinate = cvRound(circles[i][0]);
              //int c =  mRGBA.size().width;
 //            coordinate [2] = cvRound(circles[i][1]);
               //   circle center
@@ -63,20 +65,21 @@ JNIEXPORT int JNICALL Java_mobileRobot_imageProcessing_android_colorDetector_Mai
         else if (mean (mask_red, mask)[0]>130){
             //red ball
             //   circle center
-            circle(mRGBA, center, 3, Scalar(0, 0, 0), -1, 8, 0);
-            // circle outline
-            circle(mRGBA, center, radius, Scalar(255, 255, 255), 0, 8, 0);
+//            circle(mRGBA, center, 3, Scalar(0, 0, 0), -1, 8, 0);
+//            // circle outline
+//            circle(mRGBA, center, radius, Scalar(255, 255, 255), 0, 8, 0);
         }
         else{
             //no ball
             //   circle center
-            circle(mRGBA, center, 3, Scalar(0, 0, 0), -1, 8, 0);
-            // circle outline
-            circle(mRGBA, center, radius, Scalar(255, 255, 255), 0, 8, 0);
+//            circle(mRGBA, center, 3, Scalar(0, 0, 0), -1, 8, 0);
+//            // circle outline
+//            circle(mRGBA, center, radius, Scalar(255, 255, 255), 0, 8, 0);
         }
 
     }
-    return coordinateY;
+    int test =001;
+    return test;
     //return coordinate;
 }
 
