@@ -17,7 +17,7 @@ JNIEXPORT jobjectArray Java_mobileRobot_imageProcessing_android_colorDetector_Ma
     cvtColor(mRGBA, imgHSV, COLOR_RGB2HSV);
     Mat mask_blue;
     Mat mask_red;
-
+    inRange(imgHSV, Scalar(100, 50, 50), Scalar(140, 255, 255), mask_blue);
     //morphological opening (remove small objects from the foreground) 
     erode(mask_blue, mask_blue, getStructuringElement(MORPH_ELLIPSE, Size(5, 5)));
     dilate(mask_blue, mask_blue, getStructuringElement(MORPH_ELLIPSE, Size(5, 5)));
@@ -84,7 +84,7 @@ JNIEXPORT jobjectArray Java_mobileRobot_imageProcessing_android_colorDetector_Ma
             //   circle center
             circle(mRGBA, center, 3, Scalar(0, 0, 0), -1, 8, 0);
             // circle outline
-            circle(mRGBA, center, radius, Scalar(255, 255, 255), 0, 8, 0);
+            circle(mRGBA, center, radius, Scalar(0, 0, 255), 2, 8, 0);
         }
         else if (mean(mask_red, mask)[0] > 130) {
             //red ball
@@ -108,7 +108,7 @@ JNIEXPORT jobjectArray Java_mobileRobot_imageProcessing_android_colorDetector_Ma
             // circle center
             circle(mRGBA, center, 3, Scalar(0, 0, 0), -1, 8, 0);
             // circle outline
-            circle(mRGBA, center, radius, Scalar(255, 255, 255), 0, 8, 0);
+            circle(mRGBA, center, radius, Scalar(255, 0, 0), 2, 8, 0);
         }
         else {
             //no ball
@@ -132,7 +132,7 @@ JNIEXPORT jobjectArray Java_mobileRobot_imageProcessing_android_colorDetector_Ma
             // circle center
             circle(mRGBA, center, 3, Scalar(0, 0, 0), -1, 8, 0);
             // circle outline
-            circle(mRGBA, center, radius, Scalar(255, 255, 255), 0, 8, 0);
+            circle(mRGBA, center, radius, Scalar(0, 100, 0), 2, 8, 0);
         }
 
     }
