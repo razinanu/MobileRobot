@@ -14,16 +14,42 @@ def parse(btstring):
     objects = btstring.split(" ")
     if objects[0] == '':
         return []
-    return [parseOne(o) for o in objects]
+    
+    object_list = []
+    
+    for o in objects:
+        try:
+            one = parseOne(o)
+        except ValueError as er:
+            print "ERROR! ", er, "(Message: ", o, ")"
+            object_list = []
+            one = parseOneFaultyElement(o)
+        
+        object_list.append(one)
+        
+    
+    return object_list
 
 def parseOne(o):
     elements = o.split("#")
-    if len(elements) != 4:
-        print elements
     
     return (elements[0], int(elements[1]), int(elements[2]), int(elements[3]))
 
-LOOP_DURATION = 1  # in s
+def parseOneFaultyElement(o):
+    elements = o.split("#")
+    
+    color = ""
+    if "X" in elements[3]:
+        color = "X"
+    elif "B" in elements[3]:
+        color = "B"
+    elif "R" in elements[3]:
+        color = "R"
+        
+    return (color, int(elements[4]), int(elements[5]), int(elements[6]))
+    
+
+LOOP_DURATION = 0.1  # in s
 ok = True
 bt_data = 0
 
@@ -42,7 +68,6 @@ driver.give_commands((Direction.STRAIGHT, 0))
 while ok:
     try:
         start = time.time()
-        print "time: ", start
         ok = ok and driver.move()  #no code before this point!
         
         # TODO: here comes the other code
