@@ -21,7 +21,11 @@ def parse(btstring):
         try:
             one = parseOne(o)
         except ValueError as er:
+            print "###########################################"
+            print "###########################################"
             print "ERROR! ", er, "(Message: ", o, ")"
+            print "###########################################"
+            print "###########################################"
             object_list = []
             one = parseOneFaultyElement(o)
         
@@ -29,6 +33,20 @@ def parse(btstring):
         
     
     return object_list
+
+def parseRazi(btstring):
+    if btstring == "0":
+        return 0,0,0
+    else:
+        xs = btstring[0:3]
+        ys = btstring[3:7]
+        zs = btstring[7:8]
+        
+        x = int(xs)
+        y = int(ys)
+        z = int(zs)
+        return x,y,z
+        
 
 def parseOne(o):
     elements = o.split("#")
@@ -55,10 +73,10 @@ bt_data = 0
 
 print "Welcome!"
 
-print "Waiting for bluetooth connection..."
-btserver = RFCOMMServer()
-btserver.wait_for_connection()
-print "Connected!"
+# print "Waiting for bluetooth connection..."
+# btserver = RFCOMMServer()
+# btserver.wait_for_connection()
+# print "Connected!"
 
 driver = Driver(LOOP_DURATION)
 nav = Navigator()
@@ -71,7 +89,8 @@ while ok:
         ok = ok and driver.move()  #no code before this point!
         
         # TODO: here comes the other code
-        ok = ok and nav.get_bt(parse(bt_data))
+        #ok = ok and nav.get_bt(parseRazi(bt_data))
+        ok = ok and nav.get_bt(parseRazi("12312342"))
         ok = ok and driver.give_commands(nav.find_commands(driver.get_command_count()))
     
         bt_data = btserver.wait_for_data() # no code after this point!

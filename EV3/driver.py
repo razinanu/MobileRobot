@@ -24,7 +24,7 @@ class Driver:
         self.__gripper = ev3.Motor('outC')
         
         self.__loop_duration = loop_duration * 1000.0
-        self.__MAX_SPEED = 50
+        self.__MAX_SPEED = 70
         
         self.__orders = []
     
@@ -33,7 +33,6 @@ class Driver:
             return True
         
         move_direction, move_duration, speed_l, speed_r = self.__current_order()
-        print move_direction, move_duration, speed_l, speed_r
         
         speed_l, speed_r = self.__correct_speed(speed_l, speed_r)
             

@@ -63,10 +63,13 @@ class Navigator:
         self.__is_near = False
         
         self.__mach = EV3StateMachine()
-        self.__lastChange = time.time()
+        self.__lastChange = time.time() - 100
         
         self.__ground = ev3.Sensor('in2')
         self.__gripper = ev3.ColorSensor('in1')
+        self.__left = ev3.Motor('outA')
+        self.__right = ev3.Motor('outB')
+        self.__gripper = ev3.Motor('outC')
         
         self.__ground.mode = 'COL-COLOR'
         self.__gripper.mode = 'COL-COLOR'
@@ -90,7 +93,6 @@ class Navigator:
         self.__mach.assign_transition_function (State.REGAIN,      self.__start_regain) 
                
     def find_commands(self, queue_size):
-        print self.__mach.current().name()
         orders, transition = self.__mach.execute_functions(self.__line_data, self.__bt_data, queue_size)
 
         if transition != 0:
@@ -102,6 +104,7 @@ class Navigator:
     
     def get_bt(self, data):
         #TODO interpret data
+        print data, data[0], data[1], data[2] 
         self.__bt_data = data
         return True
     
@@ -118,21 +121,29 @@ class Navigator:
     
     def __search(self, line_data, bt_data, queue_size):
         # 1.) hit line --> turn
-        if (self.__ground.value() == 1) and (self.__lastChange + 2 < time.time()):
+        
+        print "Farbe Boden:", self.__ground.value()
+        
+        if (self.__ground.value() == 1) and (self.__lastChange + 3 < time.time()):
             self.__lastChange = time.time() #Drehen in Auftrag geben
             return order.left(), 0
         
         elif (self.__lastChange + 1 > time.time()):
-            return order.left(), 0    #Drehung ausführen
+            print "drehen"
+            return order.left(0,70,70), 0    #Drehung ausführen
         
-        elif (self.__lastChange + 2 > time.time()):
-            return order.move(), 0    #ohne Sensor vorwärts fahren
+        elif (self.__lastChange + 3 > time.time()):
+            print "korrektur"
+            return order.move(0,50,47), 0    #ohne Sensor vorwärts fahren
                 
         # 2.) found obstacle
-        if self.__nearest_obstacle(bt_data) != 0:
+        print "bt_data:", self.__bt_data[2]
+        if self.__bt_data[2] != 0:
+            print "Ball gefunden, Zustand wechseln"
             return order.stop(), Transition.SUCCESS
         
         # 3.) drive straight
+        print "normal fahren"
         return order.move(), 0
 
     def __approach(self, line_data, bt_data, queue_size):
