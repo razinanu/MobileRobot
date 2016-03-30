@@ -14,14 +14,40 @@ def parse(btstring):
     objects = btstring.split(" ")
     if objects[0] == '':
         return []
-    return [parseOne(o) for o in objects]
+    
+    object_list = []
+    
+    for o in objects:
+        try:
+            one = parseOne(o)
+        except ValueError as er:
+            print "ERROR! ", er, "(Message: ", o, ")"
+            object_list = []
+            one = parseOneFaultyElement(o)
+        
+        object_list.append(one)
+        
+    
+    return object_list
 
 def parseOne(o):
     elements = o.split("#")
-    if len(elements) != 4:
-        print elements
     
     return (elements[0], int(elements[1]), int(elements[2]), int(elements[3]))
+
+def parseOneFaultyElement(o):
+    elements = o.split("#")
+    
+    color = ""
+    if "X" in elements[3]:
+        color = "X"
+    elif "B" in elements[3]:
+        color = "B"
+    elif "R" in elements[3]:
+        color = "R"
+        
+    return (color, int(elements[4]), int(elements[5]), int(elements[6]))
+    
 
 LOOP_DURATION = 0.01  # in s
 ok = True
