@@ -7,11 +7,12 @@
 #include <opencv2/features2d/features2d.hpp>
 #include <vector>
 
+
 extern "C" {
-JNIEXPORT void JNICALL Java_mobileRobot_imageProcessing_android_colorDetector_MainActivity_salt(
+JNIEXPORT int JNICALL Java_mobileRobot_imageProcessing_android_colorDetector_MainActivity_salt(
         JNIEnv *env, jobject instance,
         jlong matAddrGray,
-        jint nbrElem);
+        jlong matAddrRGBA);
 
 }
 #endif //MOBILEROBOT_IMAGEPROCESSING_ANDROID_COLORDETECTOR_H
