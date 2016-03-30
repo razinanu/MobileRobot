@@ -9,11 +9,12 @@ class Direction:
     LEFT = 'left'
     RIGHT = 'right'
     STOP = 'stop'
+    DONOTHING = 'nothing'
     
     OPEN = 'open'
     CLOSE = 'close'
     
-    standard_speed = 75
+    standard_speed = 25
 
 class Driver:
     
@@ -23,7 +24,7 @@ class Driver:
         self.__gripper = ev3.Motor('outC')
         
         self.__loop_duration = loop_duration * 1000.0
-        self.__MAX_SPEED = 100
+        self.__MAX_SPEED = 50
         
         self.__orders = []
     
@@ -35,7 +36,7 @@ class Driver:
         print move_direction, move_duration, speed_l, speed_r
         
         speed_l, speed_r = self.__correct_speed(speed_l, speed_r)
-             
+            
         if move_direction == Direction.STRAIGHT:
             self.__drive_straight(move_duration, 'normal', speed_l, speed_r)
         elif move_direction == Direction.REVERSE:
@@ -50,6 +51,8 @@ class Driver:
             self.__move_gripper(move_duration, True)
         elif move_direction == Direction.CLOSE:
             self.__move_gripper(move_duration, False)
+        elif move_direction == Direction.DONOTHING:
+            pass
         else:
             print "ERROR! Navigation direction not understood. Given command was: ", move_direction
             return False
@@ -86,7 +89,7 @@ class Driver:
     
     def __current_order(self):
         if len(self.__orders) == 0:
-            return Direction.STOP, self.__loop_duration, 0,0
+            return Direction.DONOTHING, self.__loop_duration, 0,0
                 
         if len(self.__orders) > 1 and \
             self.__orders[0][0] != Direction.STOP and \

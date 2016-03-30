@@ -23,7 +23,7 @@ def parseOne(o):
     
     return (elements[0], int(elements[1]), int(elements[2]), int(elements[3]))
 
-LOOP_DURATION = 0.01  # in s
+LOOP_DURATION = 1  # in s
 ok = True
 bt_data = 0
 
@@ -42,6 +42,7 @@ driver.give_commands((Direction.STRAIGHT, 0))
 while ok:
     try:
         start = time.time()
+        print "time: ", start
         ok = ok and driver.move()  #no code before this point!
         
         # TODO: here comes the other code

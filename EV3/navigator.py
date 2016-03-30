@@ -95,9 +95,7 @@ class Navigator:
 
         if transition != 0:
             trans_result = self.__mach.transition(transition)
-            if not trans_result:
-                return False, 0
-            else:
+            if trans_result:
                 return trans_result
         
         return orders
