@@ -8,7 +8,7 @@ JNIEXPORT int JNICALL Java_mobileRobot_imageProcessing_android_colorDetector_Mai
         JNIEnv *env, jobject instance,
         jlong matAddrGray,
         jlong matAddrRGBA) {
-
+    //1280×720 Pixel resolution
     Mat &imgGray = *(Mat *) matAddrGray;
     Mat &mRGBA = *(Mat *) matAddrRGBA;
     Mat imgHSV;
@@ -40,7 +40,9 @@ JNIEXPORT int JNICALL Java_mobileRobot_imageProcessing_android_colorDetector_Mai
                  30, // minimum number of votes
                  20, 100);
     //string message = "no ball!";
-    int coordinateY = 0;
+    int coordinate= 3111111;
+    int coordinateY =0;
+    int c =  imgGray.size().height;
     for(size_t i= 0; i< circles.size() ; i++){
         Mat mask(Mat::zeros(imgGray.rows, imgGray.cols, CV_8UC1));
         int radius = cvRound(circles[i][2]);
@@ -50,14 +52,27 @@ JNIEXPORT int JNICALL Java_mobileRobot_imageProcessing_android_colorDetector_Mai
         if (mean(mask_blue,mask)[0] > 130){
             //blue ball
 //            coordinate [0] = 1;
-              coordinateY  = cvRound(circles[i][0]);
+             int coordinateY  = cvRound(circles[i][0]);
+             //int c =  mRGBA.size().width;
 //            coordinate [2] = cvRound(circles[i][1]);
+              //   circle center
+            circle(mRGBA, center, 3, Scalar(0, 0, 0), -1, 8, 0);
+					// circle outline
+            circle(mRGBA, center, radius, Scalar(255, 255, 255), 0, 8, 0);
         }
         else if (mean (mask_red, mask)[0]>130){
             //red ball
+            //   circle center
+            circle(mRGBA, center, 3, Scalar(0, 0, 0), -1, 8, 0);
+            // circle outline
+            circle(mRGBA, center, radius, Scalar(255, 255, 255), 0, 8, 0);
         }
         else{
             //no ball
+            //   circle center
+            circle(mRGBA, center, 3, Scalar(0, 0, 0), -1, 8, 0);
+            // circle outline
+            circle(mRGBA, center, radius, Scalar(255, 255, 255), 0, 8, 0);
         }
 
     }
@@ -65,6 +80,4 @@ JNIEXPORT int JNICALL Java_mobileRobot_imageProcessing_android_colorDetector_Mai
     //return coordinate;
 }
 
-
 }
-

@@ -109,7 +109,7 @@ public class MainActivity extends Activity implements CameraBridgeViewBase.CvCam
 //        String coordinateString = Character.toString(stringTest);
 
         btclient.send(btconnection,  new Integer(ycoordinate).toString());
-        return matGray;
+        return matRGBA;
     }
 
     public native int salt(long matAddrGray, long matAddRGBA);
