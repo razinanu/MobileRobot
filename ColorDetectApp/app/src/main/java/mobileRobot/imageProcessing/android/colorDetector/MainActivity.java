@@ -21,7 +21,6 @@ public class MainActivity extends Activity implements CameraBridgeViewBase.CvCam
 
     private BTClient btclient;
     private BluetoothSocket btconnection;
-    private char[] coordinate;
 
 
     private BaseLoaderCallback mLoaderCallback = new BaseLoaderCallback(this) {
@@ -103,14 +102,15 @@ public class MainActivity extends Activity implements CameraBridgeViewBase.CvCam
         Mat matGray = inputFrame.gray();
         Mat matRGBA = inputFrame.rgba();
         //int ycoordinate = salt(matGray.getNativeObjAddr(), matRGBA.getNativeObjAddr());
-        String[] arrays = salt(matGray.getNativeObjAddr(), matRGBA.getNativeObjAddr());
+        String[] coordinates = salt(matGray.getNativeObjAddr(), matRGBA.getNativeObjAddr());
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int i= 0; i< coordinates.length; i++) {
+            stringBuilder.append(coordinates[0]);
+            stringBuilder.append("#");
 
+        }
 
-//        char stringTest = 'H';
-        //String coordinateString = Character.toString(arrays.toString());
-
-        //btclient.send(btconnection,  new Integer(ycoordinate).toString());
-        btclient.send(btconnection, arrays[0]);
+        btclient.send(btconnection, stringBuilder.toString());
 
         return matRGBA;
     }

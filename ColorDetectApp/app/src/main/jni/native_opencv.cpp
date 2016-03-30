@@ -17,7 +17,7 @@ JNIEXPORT jobjectArray Java_mobileRobot_imageProcessing_android_colorDetector_Ma
     cvtColor(mRGBA, imgHSV, COLOR_RGB2HSV);
     Mat mask_blue;
     Mat mask_red;
-    inRange(imgHSV, Scalar(100, 50, 50), Scalar(140, 255, 255), mask_blue);
+
     //morphological opening (remove small objects from the foreground) 
     erode(mask_blue, mask_blue, getStructuringElement(MORPH_ELLIPSE, Size(5, 5)));
     dilate(mask_blue, mask_blue, getStructuringElement(MORPH_ELLIPSE, Size(5, 5)));
@@ -46,10 +46,10 @@ JNIEXPORT jobjectArray Java_mobileRobot_imageProcessing_android_colorDetector_Ma
     jobjectArray ret;
     int i;
 
-    char *data[]={"", "", "", "", "","","","","","","","","","","",""}; //= {"A", "B", "C", "D"};
+    char *data[]={"A", "A", "A", "A", "A","A","A","A","A","A","A","A","A","A","A","A","A"}; //= {"A", "B", "C", "D"};
 
 
-    int s = sizeof(data) / sizeof(char);
+    //int s = sizeof(data) / sizeof(char);
     //char c = itoa(s);
     ostringstream intShiftStrX;
     ostringstream intShiftStrY;
@@ -82,7 +82,8 @@ JNIEXPORT jobjectArray Java_mobileRobot_imageProcessing_android_colorDetector_Ma
             intToStringX.append("#");
             char *copyX =new char [intToStringX.length()+1];
             strcpy(copyX, intToStringX.c_str());
-            data[index++]=copyX;}
+            data[index]=copyX;
+            index++;}
             //   circle center
             circle(mRGBA, center, 3, Scalar(0, 0, 0), -1, 8, 0);
             // circle outline
@@ -90,6 +91,22 @@ JNIEXPORT jobjectArray Java_mobileRobot_imageProcessing_android_colorDetector_Ma
         }
         else if (mean(mask_red, mask)[0] > 130) {
             //red ball
+            if(index<16){
+                int coordinateX = cvRound(circles[i][1]);
+                int coordinateY = cvRound(circles[i][0]);
+                intShiftStrX<< coordinateX;
+                string intToStringX = intShiftStrX.str();
+                intShiftStrY<< coordinateY;
+                string intToStringY = intShiftStrY.str();
+                intToStringX.append("$");
+                intToStringX.append(intToStringY);
+                intToStringX.append("$");
+                intToStringX.append("R");
+                intToStringX.append("#");
+                char *copyX =new char [intToStringX.length()+1];
+                strcpy(copyX, intToStringX.c_str());
+                data[index]=copyX;
+                index++;}
             // circle center
             circle(mRGBA, center, 3, Scalar(0, 0, 0), -1, 8, 0);
             // circle outline
@@ -97,6 +114,22 @@ JNIEXPORT jobjectArray Java_mobileRobot_imageProcessing_android_colorDetector_Ma
         }
         else {
             //no ball
+            if(index<16){
+                int coordinateX = cvRound(circles[i][1]);
+                int coordinateY = cvRound(circles[i][0]);
+                intShiftStrX<< coordinateX;
+                string intToStringX = intShiftStrX.str();
+                intShiftStrY<< coordinateY;
+                string intToStringY = intShiftStrY.str();
+                intToStringX.append("$");
+                intToStringX.append(intToStringY);
+                intToStringX.append("$");
+                intToStringX.append("X");
+                intToStringX.append("#");
+                char *copyX =new char [intToStringX.length()+1];
+                strcpy(copyX, intToStringX.c_str());
+                data[index]=copyX;
+                index++;}
             // circle center
             circle(mRGBA, center, 3, Scalar(0, 0, 0), -1, 8, 0);
             // circle outline
@@ -105,11 +138,11 @@ JNIEXPORT jobjectArray Java_mobileRobot_imageProcessing_android_colorDetector_Ma
 
     }
 
-    ret = (jobjectArray) env->NewObjectArray(sizeof(&data), env->FindClass("java/lang/String"),
+    ret = (jobjectArray) env->NewObjectArray(sizeof(&data)*4, env->FindClass("java/lang/String"),
                                              env->NewStringUTF(""));
 
 
-    for (i = 0; i < sizeof(&data); i++)
+    for (i = 0; i < sizeof(&data)*4; i++)
         env->SetObjectArrayElement(ret, i, env->NewStringUTF(data[i]));
 
     return (ret);
