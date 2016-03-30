@@ -70,9 +70,6 @@ public class MainActivity extends Activity implements CameraBridgeViewBase.CvCam
     public void onResume() {
         super.onResume();
 
-        //ToDo btclient.send(btconnection, "B#1#2#4!");
-
-
         if (!OpenCVLoader.initDebug()) {
             Log.d(TAG, "Internal OpenCV library not found. Using OpenCV Manager for initialization");
             OpenCVLoader.initAsync(OpenCVLoader.OPENCV_VERSION_3_0_0, this, mLoaderCallback);
@@ -101,7 +98,6 @@ public class MainActivity extends Activity implements CameraBridgeViewBase.CvCam
     public Mat onCameraFrame(CameraBridgeViewBase.CvCameraViewFrame inputFrame) {
         Mat matGray = inputFrame.gray();
         Mat matRGBA = inputFrame.rgba();
-        //int ycoordinate = salt(matGray.getNativeObjAddr(), matRGBA.getNativeObjAddr());
         String[] coordinates = salt(matGray.getNativeObjAddr(), matRGBA.getNativeObjAddr());
         StringBuilder stringBuilder = new StringBuilder();
         for (int i= 0; i< coordinates.length; i++) {

@@ -40,25 +40,21 @@ JNIEXPORT jobjectArray Java_mobileRobot_imageProcessing_android_colorDetector_Ma
                  50,  // minimum distance between two circles
                  50, // Canny high threshold
                  30, // minimum number of votes
-                 20, 100);
+                 20, 100); // min and max radius
 
 
     jobjectArray ret;
     int i;
 
-    char *data[]={"A", "A", "A", "A", "A","A","A","A","A","A","A","A","A","A","A","A","A"}; //= {"A", "B", "C", "D"};
+    char *data[] = {"A", "A", "A", "A", "A", "A", "A", "A", "A", "A", "A", "A", "A", "A", "A", "A",
+                    "A"};
 
-
-    //int s = sizeof(data) / sizeof(char);
-    //char c = itoa(s);
     ostringstream intShiftStrX;
     ostringstream intShiftStrY;
 
     string intToStringX;
     string intToStringY;
 
-
-    bool blue, red, color=false;
     int index = 0;
     for (size_t i = 0; i < circles.size(); i++) {
         Mat mask(Mat::zeros(imgGray.rows, imgGray.cols, CV_8UC1));
@@ -68,22 +64,23 @@ JNIEXPORT jobjectArray Java_mobileRobot_imageProcessing_android_colorDetector_Ma
                radius / 2, 1);
         if (mean(mask_blue, mask)[0] > 130) {
             //blue ball
-            if(index<16){
-            int coordinateX = cvRound(circles[i][1]);
-            int coordinateY = cvRound(circles[i][0]);
-            intShiftStrX<< coordinateX;
-            string intToStringX = intShiftStrX.str();
-            intShiftStrY<< coordinateY;
-            string intToStringY = intShiftStrY.str();
-            intToStringX.append("$");
-            intToStringX.append(intToStringY);
-            intToStringX.append("$");
-            intToStringX.append("B");
-            intToStringX.append("#");
-            char *copyX =new char [intToStringX.length()+1];
-            strcpy(copyX, intToStringX.c_str());
-            data[index]=copyX;
-            index++;}
+            if (index < 16) {
+                int coordinateX = cvRound(circles[i][1]);
+                int coordinateY = cvRound(circles[i][0]);
+                intShiftStrX << coordinateX;
+                string intToStringX = intShiftStrX.str();
+                intShiftStrY << coordinateY;
+                string intToStringY = intShiftStrY.str();
+                intToStringX.append("$");
+                intToStringX.append(intToStringY);
+                intToStringX.append("$");
+                intToStringX.append("B");
+                intToStringX.append("#");
+                char *copyX = new char[intToStringX.length() + 1];
+                strcpy(copyX, intToStringX.c_str());
+                data[index] = copyX;
+                index++;
+            }
             //   circle center
             circle(mRGBA, center, 3, Scalar(0, 0, 0), -1, 8, 0);
             // circle outline
@@ -91,22 +88,23 @@ JNIEXPORT jobjectArray Java_mobileRobot_imageProcessing_android_colorDetector_Ma
         }
         else if (mean(mask_red, mask)[0] > 130) {
             //red ball
-            if(index<16){
+            if (index < 16) {
                 int coordinateX = cvRound(circles[i][1]);
                 int coordinateY = cvRound(circles[i][0]);
-                intShiftStrX<< coordinateX;
+                intShiftStrX << coordinateX;
                 string intToStringX = intShiftStrX.str();
-                intShiftStrY<< coordinateY;
+                intShiftStrY << coordinateY;
                 string intToStringY = intShiftStrY.str();
                 intToStringX.append("$");
                 intToStringX.append(intToStringY);
                 intToStringX.append("$");
                 intToStringX.append("R");
                 intToStringX.append("#");
-                char *copyX =new char [intToStringX.length()+1];
+                char *copyX = new char[intToStringX.length() + 1];
                 strcpy(copyX, intToStringX.c_str());
-                data[index]=copyX;
-                index++;}
+                data[index] = copyX;
+                index++;
+            }
             // circle center
             circle(mRGBA, center, 3, Scalar(0, 0, 0), -1, 8, 0);
             // circle outline
@@ -114,22 +112,23 @@ JNIEXPORT jobjectArray Java_mobileRobot_imageProcessing_android_colorDetector_Ma
         }
         else {
             //no ball
-            if(index<16){
+            if (index < 16) {
                 int coordinateX = cvRound(circles[i][1]);
                 int coordinateY = cvRound(circles[i][0]);
-                intShiftStrX<< coordinateX;
+                intShiftStrX << coordinateX;
                 string intToStringX = intShiftStrX.str();
-                intShiftStrY<< coordinateY;
+                intShiftStrY << coordinateY;
                 string intToStringY = intShiftStrY.str();
                 intToStringX.append("$");
                 intToStringX.append(intToStringY);
                 intToStringX.append("$");
                 intToStringX.append("X");
                 intToStringX.append("#");
-                char *copyX =new char [intToStringX.length()+1];
+                char *copyX = new char[intToStringX.length() + 1];
                 strcpy(copyX, intToStringX.c_str());
-                data[index]=copyX;
-                index++;}
+                data[index] = copyX;
+                index++;
+            }
             // circle center
             circle(mRGBA, center, 3, Scalar(0, 0, 0), -1, 8, 0);
             // circle outline
@@ -138,11 +137,11 @@ JNIEXPORT jobjectArray Java_mobileRobot_imageProcessing_android_colorDetector_Ma
 
     }
 
-    ret = (jobjectArray) env->NewObjectArray(sizeof(&data)*4, env->FindClass("java/lang/String"),
+    ret = (jobjectArray) env->NewObjectArray(sizeof(&data) * 4, env->FindClass("java/lang/String"),
                                              env->NewStringUTF(""));
 
 
-    for (i = 0; i < sizeof(&data)*4; i++)
+    for (i = 0; i < sizeof(&data) * 4; i++)
         env->SetObjectArrayElement(ret, i, env->NewStringUTF(data[i]));
 
     return (ret);
