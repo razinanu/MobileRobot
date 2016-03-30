@@ -55,3 +55,8 @@ captures/
 /EV3/ev3_statemachine.pyc
 /EV3/statemachine.pyc
 /EV3/test.py
+/.cproject
+/EV3/.cproject
+/.project
+/.pydevproject
+/.settings/org.eclipse.core.resources.prefs
