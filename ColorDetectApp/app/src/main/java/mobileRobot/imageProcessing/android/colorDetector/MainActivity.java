@@ -102,16 +102,19 @@ public class MainActivity extends Activity implements CameraBridgeViewBase.CvCam
     public Mat onCameraFrame(CameraBridgeViewBase.CvCameraViewFrame inputFrame) {
         Mat matGray = inputFrame.gray();
         Mat matRGBA = inputFrame.rgba();
-        int ycoordinate = salt(matGray.getNativeObjAddr(), matRGBA.getNativeObjAddr());
+        //int ycoordinate = salt(matGray.getNativeObjAddr(), matRGBA.getNativeObjAddr());
+        String[] arrays = salt(matGray.getNativeObjAddr(), matRGBA.getNativeObjAddr());
 
 
 //        char stringTest = 'H';
-//        String coordinateString = Character.toString(stringTest);
+        //String coordinateString = Character.toString(arrays.toString());
 
-        btclient.send(btconnection,  new Integer(ycoordinate).toString());
+        //btclient.send(btconnection,  new Integer(ycoordinate).toString());
+        btclient.send(btconnection, arrays[0]);
+
         return matRGBA;
     }
 
-    public native int salt(long matAddrGray, long matAddRGBA);
+    public native String[] salt(long matAddrGray, long matAddRGBA);
 
 }

@@ -8,12 +8,17 @@
 #include <iostream>
 #include "opencv2/highgui/highgui.hpp"
 #include "opencv2/imgproc/imgproc.hpp"
+#include <stdio.h>
+#include <string.h>
+#include <iostream>
+#include <stdlib.h>
+#include <string>
 
 
 
 extern "C" {
 
-JNIEXPORT int JNICALL Java_mobileRobot_imageProcessing_android_colorDetector_MainActivity_salt(
+JNIEXPORT jobjectArray Java_mobileRobot_imageProcessing_android_colorDetector_MainActivity_salt(
         JNIEnv *env, jobject instance,
         jlong matAddrGray,
         jlong matAddrRGBA);

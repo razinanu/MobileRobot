@@ -3,8 +3,10 @@
 using namespace std;
 using namespace cv;
 
+
+
 extern "C" {
-JNIEXPORT int JNICALL Java_mobileRobot_imageProcessing_android_colorDetector_MainActivity_salt(
+JNIEXPORT jobjectArray Java_mobileRobot_imageProcessing_android_colorDetector_MainActivity_salt(
         JNIEnv *env, jobject instance,
         jlong matAddrGray,
         jlong matAddrRGBA) {
@@ -40,47 +42,80 @@ JNIEXPORT int JNICALL Java_mobileRobot_imageProcessing_android_colorDetector_Mai
                  30, // minimum number of votes
                  20, 100);
 
-    int coordinate= 0;
-    int coordinateX =0;
-    //int c =  imgGray.size().height;
-    int c =  mRGBA.size().width;
-    for(size_t i= 0; i< circles.size() ; i++){
+
+    jobjectArray ret;
+    int i;
+
+    char *data[]={"", "", "", "", "","","","","","","","","","","",""}; //= {"A", "B", "C", "D"};
+
+
+    int s = sizeof(data) / sizeof(char);
+    //char c = itoa(s);
+    ostringstream intShiftStrX;
+    ostringstream intShiftStrY;
+
+    string intToStringX;
+    string intToStringY;
+
+
+    bool blue, red, color=false;
+    int index = 0;
+    for (size_t i = 0; i < circles.size(); i++) {
         Mat mask(Mat::zeros(imgGray.rows, imgGray.cols, CV_8UC1));
         int radius = cvRound(circles[i][2]);
         Point center(cvRound(circles[i][0]), cvRound(circles[i][1]));
         circle(mask, center, radius / 3, Scalar(255, 255, 255),
                radius / 2, 1);
-        if (mean(mask_blue,mask)[0] > 130){
+        if (mean(mask_blue, mask)[0] > 130) {
             //blue ball
-            coordinateX = cvRound(circles[i][1])*100000;
-            //coordinateY
-            //int coordinate = cvRound(circles[i][0]);
-             //int c =  mRGBA.size().width;
-//            coordinate [2] = cvRound(circles[i][1]);
-              //   circle center
+            if(index<16){
+            int coordinateX = cvRound(circles[i][1]);
+            int coordinateY = cvRound(circles[i][0]);
+            intShiftStrX<< coordinateX;
+            string intToStringX = intShiftStrX.str();
+            intShiftStrY<< coordinateY;
+            string intToStringY = intShiftStrY.str();
+            intToStringX.append("$");
+            intToStringX.append(intToStringY);
+            intToStringX.append("$");
+            intToStringX.append("B");
+            intToStringX.append("#");
+            char *copyX =new char [intToStringX.length()+1];
+            strcpy(copyX, intToStringX.c_str());
+            data[index++]=copyX;}
+            //   circle center
             circle(mRGBA, center, 3, Scalar(0, 0, 0), -1, 8, 0);
-					// circle outline
+            // circle outline
             circle(mRGBA, center, radius, Scalar(255, 255, 255), 0, 8, 0);
         }
-        else if (mean (mask_red, mask)[0]>130){
+        else if (mean(mask_red, mask)[0] > 130) {
             //red ball
-            //   circle center
-//            circle(mRGBA, center, 3, Scalar(0, 0, 0), -1, 8, 0);
-//            // circle outline
-//            circle(mRGBA, center, radius, Scalar(255, 255, 255), 0, 8, 0);
+            // circle center
+            circle(mRGBA, center, 3, Scalar(0, 0, 0), -1, 8, 0);
+            // circle outline
+            circle(mRGBA, center, radius, Scalar(255, 255, 255), 0, 8, 0);
         }
-        else{
+        else {
             //no ball
-            //   circle center
-//            circle(mRGBA, center, 3, Scalar(0, 0, 0), -1, 8, 0);
-//            // circle outline
-//            circle(mRGBA, center, radius, Scalar(255, 255, 255), 0, 8, 0);
+            // circle center
+            circle(mRGBA, center, 3, Scalar(0, 0, 0), -1, 8, 0);
+            // circle outline
+            circle(mRGBA, center, radius, Scalar(255, 255, 255), 0, 8, 0);
         }
 
     }
-    int test =001;
-    return test;
-    //return coordinate;
+
+    ret = (jobjectArray) env->NewObjectArray(sizeof(&data), env->FindClass("java/lang/String"),
+                                             env->NewStringUTF(""));
+
+
+    for (i = 0; i < sizeof(&data); i++)
+        env->SetObjectArrayElement(ret, i, env->NewStringUTF(data[i]));
+
+    return (ret);
+
+
 }
+
 
 }
