@@ -37,23 +37,18 @@ JNIEXPORT jobjectArray Java_mobileRobot_imageProcessing_android_colorDetector_Ma
     vector<Vec3f> circles;
     HoughCircles(imgGray, circles, CV_HOUGH_GRADIENT,
                  1, // accumulator resolution (size of the image / 2)
-                 50,  // minimum distance between two circles
+                 90,  // minimum distance between two circles
                  50, // Canny high threshold
                  30, // minimum number of votes
-                 20, 100); // min and max radius
+                 40, 100); // min and max radius
 
 
     jobjectArray ret;
     int i;
 
-    char *data[] = {"A", "A", "A", "A", "A", "A", "A", "A", "A", "A", "A", "A", "A", "A", "A", "A",
-                    "A"};
+    char *data[] = {"0$0$X#", "0$0$X#", "0$0$X#", "0$0$X#", "0$0$X#", "0$0$X#", "0$0$X#", "0$0$X#", "0$0$X#", "0$0$X#", "0$0$X#", "0$0$X#", "0$0$X#", "0$0$X#", "0$0$X#", "0$0$X#",
+                    "0$0$X#"};
 
-    ostringstream intShiftStrX;
-    ostringstream intShiftStrY;
-
-    string intToStringX;
-    string intToStringY;
 
     int index = 0;
     for (size_t i = 0; i < circles.size(); i++) {
@@ -62,6 +57,9 @@ JNIEXPORT jobjectArray Java_mobileRobot_imageProcessing_android_colorDetector_Ma
         Point center(cvRound(circles[i][0]), cvRound(circles[i][1]));
         circle(mask, center, radius / 3, Scalar(255, 255, 255),
                radius / 2, 1);
+
+        ostringstream intShiftStrX;
+        ostringstream intShiftStrY;
         if (mean(mask_blue, mask)[0] > 130) {
             //blue ball
             if (index < 16) {
@@ -84,7 +82,7 @@ JNIEXPORT jobjectArray Java_mobileRobot_imageProcessing_android_colorDetector_Ma
             //   circle center
             circle(mRGBA, center, 3, Scalar(0, 0, 0), -1, 8, 0);
             // circle outline
-            circle(mRGBA, center, radius, Scalar(0, 0, 255), 2, 8, 0);
+            circle(mRGBA, center, radius, Scalar(0, 255, 255), 3, 8, 0);
         }
         else if (mean(mask_red, mask)[0] > 130) {
             //red ball
@@ -108,7 +106,7 @@ JNIEXPORT jobjectArray Java_mobileRobot_imageProcessing_android_colorDetector_Ma
             // circle center
             circle(mRGBA, center, 3, Scalar(0, 0, 0), -1, 8, 0);
             // circle outline
-            circle(mRGBA, center, radius, Scalar(255, 0, 0), 2, 8, 0);
+            circle(mRGBA, center, radius, Scalar(255, 127, 0), 3, 8, 0);
         }
         else {
             //no ball
@@ -132,7 +130,7 @@ JNIEXPORT jobjectArray Java_mobileRobot_imageProcessing_android_colorDetector_Ma
             // circle center
             circle(mRGBA, center, 3, Scalar(0, 0, 0), -1, 8, 0);
             // circle outline
-            circle(mRGBA, center, radius, Scalar(0, 100, 0), 2, 8, 0);
+            circle(mRGBA, center, radius, Scalar(127, 255, 0), 3, 8, 0);
         }
 
     }

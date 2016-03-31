@@ -101,8 +101,7 @@ public class MainActivity extends Activity implements CameraBridgeViewBase.CvCam
         String[] coordinates = salt(matGray.getNativeObjAddr(), matRGBA.getNativeObjAddr());
         StringBuilder stringBuilder = new StringBuilder();
         for (int i= 0; i< coordinates.length; i++) {
-            stringBuilder.append(coordinates[0]);
-            stringBuilder.append("#");
+            stringBuilder.append(coordinates[i]);
 
         }
 
