@@ -386,7 +386,7 @@ class Navigator:
             self.__gripperOpen = False
             return order.close(), 0
         
-        if not self.__gripperOpen:
+        if not self.__gripperOpen and queue_size == 0:
             if self.__gripper.value() == 2: # blauer Ball
                 self.__blueBallInGripper = True
                 self.__redBallInGripper = False
@@ -407,8 +407,8 @@ class Navigator:
         # close gripper
         # if closed and ball in front of sensor --> success
         # if closed and nothing in front of sensor --> fail
-        print "das haette nie erreicht werden sollen 494373534p95voirelkd"
-        return order.stop(), 0
+        print "close further"
+        return order.keep_going(), 0
     
     # Ball freilassen
     def __release(self, line_data, bt_data, queue_size):
