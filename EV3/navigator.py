@@ -45,11 +45,11 @@ class order:
     
     @staticmethod
     def open():
-        return (Direction.OPEN, 600)
+        return (Direction.OPEN, 1200)
     
     @staticmethod
     def close():
-        return (Direction.CLOSE, 600)
+        return (Direction.CLOSE, 1200)
     
     @staticmethod
     def keep_going():

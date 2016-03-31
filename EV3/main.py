@@ -41,7 +41,9 @@ def parseOne(o):
     tup = (int(elements[0]), int(elements[1]), elements[2])
     
     if tup[0] > 720 or tup[1] > 1280:
+        print tup
         tup = (0,0,'X')
+        
     
     return tup
   
@@ -68,7 +70,6 @@ driver.give_commands((Direction.STRAIGHT, 0))
 while ok:
     try:
         start = time.time()
-        print time.time()
         ok = ok and driver.move()  #no code before this point!
         # TODO: here comes the other code
         ok = ok and nav.get_bt(parse(bt_data))

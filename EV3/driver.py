@@ -190,6 +190,6 @@ class Driver:
     
     def __move_gripper(self, duration, should_open):
         if should_open:
-            self.__gripper.run_timed(time_sp=duration, polarity='inversed', duty_cycle_sp=25)
+            self.__gripper.run_timed(time_sp=duration, polarity='inversed', duty_cycle_sp=30)
         else:
-            self.__gripper.run_timed(time_sp=duration, polarity='normal', duty_cycle_sp=25)
+            self.__gripper.run_timed(time_sp=duration, polarity='normal', duty_cycle_sp=30)
