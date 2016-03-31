@@ -55,8 +55,8 @@ bt_data = 0
 print "Welcome!"
 
 print "Waiting for bluetooth connection..."
-btserver = RFCOMMServer()
-btserver.wait_for_connection()
+#btserver = RFCOMMServer()
+#btserver.wait_for_connection()
 print "Connected!"
 
 driver = Driver(LOOP_DURATION)
@@ -64,20 +64,17 @@ nav = Navigator()
 
 driver.give_commands((Direction.STRAIGHT, 0))
 
-## TEST !!! ###
-#btstring = "450$550$B#10$10$B#100$100$X#20$20$R#"
-
 while ok:
     try:
         start = time.time()
         ok = ok and driver.move()  #no code before this point!
         # TODO: here comes the other code
-        ok = ok and nav.get_bt(parse(bt_data))
+        #ok = ok and nav.get_bt(parse(bt_data))
 #         ok = ok and nav.get_bt(parse(btstring))
         
-        ok = ok and driver.give_commands(nav.find_commands(driver.get_command_count()))
+        #ok = ok and driver.give_commands(nav.find_commands(driver.get_command_count()))
     
-        bt_data = btserver.wait_for_data() # no code after this point!
+        #bt_data = btserver.wait_for_data() # no code after this point!
         
         end = time.time()
         remain = start + LOOP_DURATION - end
@@ -92,7 +89,7 @@ while ok:
 
 
 print "Close bluetooth connection..."
-btserver.close()
+#btserver.close()
 print "Closed!"
 
 print "Program finished."
