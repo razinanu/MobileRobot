@@ -21,7 +21,7 @@ class Driver:
     def __init__(self, loop_duration):
         self.__left = ev3.Motor('outA')
         self.__right = ev3.Motor('outB')
-        self.__gripper = ev3.Motor('outC')
+        self.__gripper = ev3.Motor('outD')
         
         self.__loop_duration = loop_duration * 1000.0
         self.__MAX_SPEED = 70
@@ -189,7 +189,9 @@ class Driver:
         self.__right.stop()       
     
     def __move_gripper(self, duration, should_open):
+        print "move gripper"
         if should_open:
             self.__gripper.run_timed(time_sp=duration, polarity='inversed', duty_cycle_sp=35)
         else:
             self.__gripper.run_timed(time_sp=duration, polarity='normal', duty_cycle_sp=35)
+        print "gripper was moved"
