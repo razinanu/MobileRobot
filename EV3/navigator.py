@@ -45,11 +45,11 @@ class order:
     
     @staticmethod
     def open():
-        return (Direction.OPEN, 400)
+        return (Direction.OPEN, 550)
     
     @staticmethod
     def close():
-        return (Direction.CLOSE, 500)
+        return (Direction.CLOSE, 550)
     
     @staticmethod
     def keep_going():
@@ -83,6 +83,8 @@ class Navigator:
         self.__gripperOpen = True
         self.__redBallInGripper = False
         self.__blueBallInGripper = False
+        
+        self.__approached_color = "X"
         
         self.__mach.assign_function (State.SEARCH,      self.__search)
         self.__mach.assign_function (State.APPROACH,    self.__approach)
@@ -211,6 +213,8 @@ class Navigator:
         if smallestX[2] == "X":
             print "in Modus Ausweichen wechseln"
             return order.stop(), Transition.LINE                #in Ausweichen wechseln
+        
+        self.__approached_color = smallestX[2]
         
         if smallestX[1] > self.YL and smallestX[1] < self.YR:           # liegt der Ball mittig?
             if smallestX[0] > self.XU:                              # liegt der mittige Ball im unteren Bildviertel?
@@ -397,11 +401,25 @@ class Navigator:
                 self.__redBallInGripper = True  
                 print "roten Ball gegriffen"
                 return order.stop(), Transition.SUCCESS
-            else:
-                self.__blueBallInGripper = False
-                self.__redBallInGripper = False  
-                print "leider kein richtiger Ball :("
-                return order.stop(), Transition.FAIL            
+            elif self.__gripper.value != 0:
+                if self.__approached_color == "B":
+                    self.__blueBallInGripper = True
+                    self.__redBallInGripper = False
+                    print "blauen Ball gegriffen 2"
+                    return order.stop(), Transition.SUCCESS
+                elif self.__approached_color == "R":
+                    self.__blueBallInGripper = False
+                    self.__redBallInGripper = True  
+                    print "roten Ball gegriffen 2"
+                    return order.stop(), Transition.SUCCESS
+
+
+            
+            self.__blueBallInGripper = False
+            self.__redBallInGripper = False  
+            print "leider kein richtiger Ball :("
+            return order.stop(), Transition.FAIL     
+                   
             
         
         # close gripper
