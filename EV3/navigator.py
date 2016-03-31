@@ -139,15 +139,15 @@ class Navigator:
             self.__lastChange = time.time() - 2
             return order.stop(), Transition.LINE
         
-        if (self.__ground.value() == 1) and (self.__lastChange + 4 < time.time()):
+        if (self.__ground.value() == 1) and (self.__lastChange + 3.2 < time.time()):
             self.__lastChange = time.time() #Drehen in Auftrag geben
             return order.left(), 0
         
-        elif (self.__lastChange + 1.5 > time.time()):
+        elif (self.__lastChange + 1.2 > time.time()):
             print "drehen"
-            return order.left(0,70,70), 0    #Drehung ausführen
+            return order.left(0,50,50), 0    #Drehung ausführen
         
-        elif (self.__lastChange + 4 > time.time()):
+        elif (self.__lastChange + 3.2 > time.time()):
             print "korrektur"
             return order.move(0,50,47), 0    #ohne Sensor vorwärts fahren
                 
