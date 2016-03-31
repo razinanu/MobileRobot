@@ -173,15 +173,15 @@ class Navigator:
             return order.stop(), Transition.SUCCESS
     
         # Linie behandeln
-        if (self.__ground.value() == 1) and (self.__lastChange + 3 < time.time()):
+        if (self.__ground.value() == 1) and (self.__lastChange + 3.2 < time.time()):
             self.__lastChange = time.time() #Drehen in Auftrag geben
             return order.left(), 0
         
-        elif (self.__lastChange + 1 > time.time()):
+        elif (self.__lastChange + 1.2 > time.time()):
             print "drehen"
-            return order.left(0,70,70), 0    #Drehung ausführen
+            return order.left(0,50,50), 0    #Drehung ausführen
         
-        elif (self.__lastChange + 3 > time.time()):
+        elif (self.__lastChange + 3.2 > time.time()):
             print "korrektur"
             return order.move(0,50,47), 0    #ohne Sensor vorwärts fahren
         
@@ -238,15 +238,15 @@ class Navigator:
         
         print "Farbe Boden:", self.__ground.value()
         
-        if (self.__ground.value() == 1) and (self.__lastChange + 3 < time.time()):
+        if (self.__ground.value() == 1) and (self.__lastChange + 3.2 < time.time()):
             self.__lastChange = time.time() #Drehen in Auftrag geben
             return order.left(), 0
         
-        elif (self.__lastChange + 1 > time.time()):
+        elif (self.__lastChange + 1.2 > time.time()):
             print "drehen"
-            return order.left(0,70,70), 0    #Drehung ausführen
+            return order.left(0,50,50), 0    #Drehung ausführen
         
-        elif (self.__lastChange + 3 > time.time()):
+        elif (self.__lastChange + 3.2 > time.time()):
             print "korrektur"
             return order.move(0,50,47), 0    #ohne Sensor vorwärts fahren
              
@@ -283,15 +283,15 @@ class Navigator:
         """ return the way you came and turn. when finished, Transition.SUCCESS"""
 
         # Linie behandeln
-        if (self.__ground.value() == 1) and (self.__lastChange + 3 < time.time()):
+        if (self.__ground.value() == 1) and (self.__lastChange + 3.2 < time.time()):
             self.__lastChange = time.time() #Drehen in Auftrag geben
             return order.left(), 0
         
-        elif (self.__lastChange + 1 > time.time()):
+        elif (self.__lastChange + 1.2 > time.time()):
             print "drehen"
-            return order.left(0,70,70), 0    #Drehung ausführen
+            return order.left(0,50,50), 0    #Drehung ausführen
         
-        elif (self.__lastChange + 3 > time.time()):
+        elif (self.__lastChange + 3.2 > time.time()):
             print "korrektur"
             return order.move(0,50,47), 0    #ohne Sensor vorwärts fahren
         
@@ -332,13 +332,13 @@ class Navigator:
     # Ausweichen mit Ball
     def __evasion2(self, line_data, bt_data, queue_size):
         # Linie behandeln
-        if (self.__ground.value() == 1) and (self.__lastChange + 3 < time.time()):
+        if (self.__ground.value() == 1) and (self.__lastChange + 3.2 < time.time()):
             self.__lastChange = time.time() #Drehen in Auftrag geben
             return order.left(), 0
         
-        elif (self.__lastChange + 1 > time.time()):
+        elif (self.__lastChange + 1.2 > time.time()):
             print "drehen"
-            return order.left(0,70,70), 0    #Drehung ausführen
+            return order.left(0,50,50), 0    #Drehung ausführen
         
         elif (self.__lastChange + 3 > time.time()):
             print "korrektur"
