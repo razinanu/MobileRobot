@@ -38,7 +38,12 @@ def parse(btstring):
 
 def parseOne(o):
     elements = o.split("$")
-    return (int(elements[0]), int(elements[1]), elements[2])
+    tup = (int(elements[0]), int(elements[1]), elements[2])
+    
+    if tup[0] > 720 or tup[1] > 1280:
+        tup = (0,0,'X')
+    
+    return tup
   
 
 LOOP_DURATION = 0.5  # in s
