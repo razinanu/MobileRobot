@@ -189,7 +189,7 @@ class Navigator:
         if len(bt_data) == 0:
             print "Ball verloren, in Suchen zurueck"
             print bt_data
-            return order.stop(), Transition.FAIL 
+            return order.stop(), Transition.SUCCESS 
         
 #         bt_data = [[9,2,3],[4,5,6],[7,8,9]]
         i = 0
@@ -206,7 +206,7 @@ class Navigator:
         
         if smallestX[0] == 0:
             print "kein richtiger Ball, in Suchen zurueck"
-            return order.stop(), Transition.FAIL 
+            return order.stop(), Transition.SUCCESS 
         
         if smallestX[2] == "X":
             print "in Modus Ausweichen wechseln"
