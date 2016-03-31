@@ -13,12 +13,14 @@ def parse(btstring):
     
     
     objects = btstring.split("#")
-    if objects[0] == '':        #oder '0'
+    if 'A' in objects[0]:        #oder '0'
         return []
     
     object_list = []
     
     for o in objects:
+        
+        one = 0
         try:
             if(o != ''):
                 one = parseOne(o)
@@ -28,16 +30,18 @@ def parse(btstring):
             print("ERROR! ", er, "(Message: ", o, ")")
             print("###########################################")
             print("###########################################")
-        object_list.append(one)
+        
+        if one != 0:
+            object_list.append(one)
         
     return object_list
 
 def parseOne(o):
     elements = o.split("$")
-    return [int(elements[1]), int(elements[2]), elements[3]]
+    return (int(elements[0]), int(elements[1]), elements[2])
   
 
-LOOP_DURATION = 0.1  # in s
+LOOP_DURATION = 0.5  # in s
 ok = True
 bt_data = 0
 
@@ -54,16 +58,17 @@ nav = Navigator()
 driver.give_commands((Direction.STRAIGHT, 0))
 
 ## TEST !!! ###
-#btstring = "$450$550$B#$10$10$B#$100$100$X#$20$20$R#"
+#btstring = "450$550$B#10$10$B#100$100$X#20$20$R#"
 
 while ok:
     try:
         start = time.time()
+        print time.time()
         ok = ok and driver.move()  #no code before this point!
-        
         # TODO: here comes the other code
         ok = ok and nav.get_bt(parse(bt_data))
 #         ok = ok and nav.get_bt(parse(btstring))
+        
         ok = ok and driver.give_commands(nav.find_commands(driver.get_command_count()))
     
         bt_data = btserver.wait_for_data() # no code after this point!
@@ -76,7 +81,7 @@ while ok:
     except KeyboardInterrupt:
         break
     except AttributeError as er:
-        print er.message()
+        print er.message
         break
 
 

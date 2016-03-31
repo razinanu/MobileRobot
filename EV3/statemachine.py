@@ -59,8 +59,11 @@ class StateMachine:
         return self.__current
     
     def transition(self, transition):
+        
+        print "old: ", self.__current.name()
         new_state = self.__current.transition(transition)
         
+        print "new: ", new_state.name()
         if new_state != 0:
             self.__current = new_state
             return True

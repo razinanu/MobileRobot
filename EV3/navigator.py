@@ -45,11 +45,11 @@ class order:
     
     @staticmethod
     def open():
-        return (Direction.OPEN, 900)
+        return (Direction.OPEN, 600)
     
     @staticmethod
     def close():
-        return (Direction.CLOSE, 900)
+        return (Direction.CLOSE, 600)
     
     @staticmethod
     def keep_going():
@@ -65,10 +65,11 @@ class Navigator:
         self.__is_near = False
         
         self.YLL = 200
-        self.YL = 500
-        self.YR = 700
+        self.YL = 450
+        self.YR = 750
         self.YRR = 1080
         self.XU = 540
+        self.THRESHHOLD = 440
         self.MITTE = 640
         
         self.__mach = EV3StateMachine()
@@ -76,9 +77,6 @@ class Navigator:
         
         self.__ground = ev3.Sensor('in2')
         self.__gripper = ev3.ColorSensor('in1')
-        self.__left = ev3.Motor('outA')
-        self.__right = ev3.Motor('outB')
-        self.__gripper = ev3.Motor('outC')
         
         self.__ground.mode = 'COL-COLOR'
         self.__gripper.mode = 'COL-COLOR'
@@ -117,7 +115,6 @@ class Navigator:
     
     def get_bt(self, data):
         #TODO interpret data
-        print data, data[0], data[1], data[2] 
         self.__bt_data = data
         return True
     
@@ -137,23 +134,30 @@ class Navigator:
         
         print "Farbe Boden:", self.__ground.value()
         
-        if (self.__ground.value() == 1) and (self.__lastChange + 3 < time.time()):
+        if self.__gripper.value() == 2 or self.__gripper.value() == 5:
+            print "Ball beim Suchen gefunden"
+            self.__lastChange = time.time() - 2
+            return order.stop(), Transition.LINE
+        
+        if (self.__ground.value() == 1) and (self.__lastChange + 4 < time.time()):
             self.__lastChange = time.time() #Drehen in Auftrag geben
             return order.left(), 0
         
-        elif (self.__lastChange + 1 > time.time()):
+        elif (self.__lastChange + 1.5 > time.time()):
             print "drehen"
             return order.left(0,70,70), 0    #Drehung ausführen
         
-        elif (self.__lastChange + 3 > time.time()):
+        elif (self.__lastChange + 4 > time.time()):
             print "korrektur"
             return order.move(0,50,47), 0    #ohne Sensor vorwärts fahren
                 
-        # 2.) found obstacle
-        print "bt_data:", self.__bt_data[2]
-        if self.__bt_data[2] != 0:
-            print "Ball gefunden, Zustand wechseln"
-            return order.stop(), Transition.SUCCESS
+        # 2.) found obstacle       
+        i = 0
+        smallestX = 0, 0, "AZX"
+        for i, val in enumerate(bt_data):
+            if val[2] != "X":
+                print "Ball gefunden, Zustand wechseln"
+                return order.move(0,30,30), Transition.SUCCESS             
         
         # 3.) drive straight
         print "normal fahren"
@@ -161,6 +165,12 @@ class Navigator:
 
     #Annähern
     def __approach(self, line_data, bt_data, queue_size):
+        print "Ball annähern"
+    
+        if self.__gripper.value() == 2 or self.__gripper.value() == 5:
+            print "Ball beim Annähern gefunden"
+            self.__lastChange = time.time() - 2
+            return order.stop(), Transition.SUCCESS
     
         # Linie behandeln
         if (self.__ground.value() == 1) and (self.__lastChange + 3 < time.time()):
@@ -181,17 +191,22 @@ class Navigator:
             print bt_data
             return order.stop(), Transition.FAIL 
         
-        bt_data = [[9,2,3],[4,5,6],[7,8,9]]
+#         bt_data = [[9,2,3],[4,5,6],[7,8,9]]
         i = 0
-        smallestX = 0, i
+        smallestX = 0, 0, "AZX"
         for i, val in enumerate(bt_data):
             if val[0] > smallestX[0]:                           # ist der Ball näher am Roboter?
-                if val[2] != "X":                                 # hat der Ball die richtige Farbe?
+                if val[2] != "X":                               # hat der Ball die richtige Farbe?                                             # ist der falsche Ball nah genug am Roboter?     
                     smallestX = val[0], val[1], val[2]
                 elif smallestX[1] > self.YLL and smallestX[1] < self.YRR:   # liegt der andersfarbige Ball im Kollisionsbereich?
-                    smallestX = val[0], val[1], val[2]
+                    if val[0] > self.THRESHHOLD:
+                        smallestX = val[0], val[1], val[2]
               
-        print "annaehren", smallestX[0], smallestX[1]
+        print "annaehern", smallestX[0], smallestX[1]
+        
+        if smallestX[0] == 0:
+            print "kein richtiger Ball, in Suchen zurueck"
+            return order.stop(), Transition.FAIL 
         
         if smallestX[2] == "X":
             print "in Modus Ausweichen wechseln"
@@ -203,13 +218,16 @@ class Navigator:
                 self.__lastChange = time.time()                        
                 return order.stop(), Transition.SUCCESS         # Ball liegt richtig; in Vorfahren und Greifen wechseln
             else:
-                return order.move(0,50,47), 0                   # stück nach vorne fahren
+                print "nach vorne fahren"
+                return order.move(0,30,29), 0                   # stück nach vorne fahren
             
         else:
             if smallestX[1] < self.MITTE:
-                return order.left(0,50,50), 0                   # links drehen
+                print "links drehen"
+                return order.left(0,15,15), 0                   # links drehen
             else: 
-                return order.right(0,50,50), 0                  # rechts drehen
+                print "rechts drehen"
+                return order.right(0,15,15), 0                  # rechts drehen
             
         
         
@@ -282,15 +300,15 @@ class Navigator:
             return order.move(0,50,47), 0
         
         # Objekte suchen
-        bt_data = [[9,2,3],[4,5,6],[7,8,9]]
+#         bt_data = [[9,2,3],[4,5,6],[7,8,9]]
         i = 0
-        smallestX = 0, 0, 0
+        smallestX = 0, 0, "AZX"
         for i, val in enumerate(bt_data):
             if val[0] > smallestX[0]:                           # ist der Ball näher am Roboter?
                 if val[2] != "X":                                 # hat der Ball die richtige Farbe?
                     smallestX = val[0], val[1], val[2]
-                elif smallestX[1] > self.YLL and smallestX[1] < self.YRR:   # liegt der andersfarbige Ball im Kollisionsbereich?
-                    smallestX = val[0], val[1], val[2]
+#                 elif smallestX[1] > self.YLL and smallestX[1] < self.YRR:   # liegt der andersfarbige Ball im Kollisionsbereich?
+#                     smallestX = val[0], val[1], val[2]
               
         print "ausweichen", smallestX[0], smallestX[1]
         
@@ -332,18 +350,18 @@ class Navigator:
             return order.stop(), Transition.SUCCESS 
         
         # Objekte suchen
-        bt_data = [[9,2,3],[4,5,6],[7,8,9]]
+#         bt_data = [[9,2,3],[4,5,6],[7,8,9]]
         i = 0
-        smallestX = 0, 0, "A"
+        smallestX = 0, 0, "AZX"
         for i, val in enumerate(bt_data):
             if val[0] > smallestX[0]:                           # ist der Ball näher am Roboter?
                 if smallestX[1] > self.YLL and smallestX[1] < self.YRR:   # liegt der andersfarbige Ball im Kollisionsbereich?
-                    if val[0] > XU:     # nur vor dem Ball ausweichen, wenn dieser vor dem Roboter liegt
+                    if val[0] > self.THRESHHOLD:     # nur vor dem Ball ausweichen, wenn dieser vor dem Roboter liegt
                         smallestX = val[0], val[1], val[2]
               
         print "ausweichen_2", smallestX[0], smallestX[1]
         
-        if smallestX[2] == "A":
+        if smallestX[2] == "AZX":
             print "kein Ball direkt vor dem Roboter"
             return order.stop(), Transition.SUCCESS 
         
@@ -359,25 +377,30 @@ class Navigator:
         """close gripper, check for success and color"""
         
         # auf den Ball zu fahren; Zeit muss beim Moduswechsel auf aktuelle Zeit gesetzt werden!
-        if self.__lastChange + 1.5 > time.time():
-            return order.move(0,50,47), 0
+        if (self.__lastChange + 1.5) > time.time():
+            print "auf den ball zufahren"
+            return order.move(0,30,27), 0
         
         if self.__gripperOpen:
+            print "greifer schließen"
             self.__gripperOpen = False
             return order.close(), 0
         
         if not self.__gripperOpen:
-            if self.__gripper.value() == 2:
+            if self.__gripper.value() == 2: # blauer Ball
                 self.__blueBallInGripper = True
                 self.__redBallInGripper = False
+                print "blauen Ball gegriffen"
                 return order.stop(), Transition.SUCCESS
-            elif self.__gripper.value() == 5:
+            elif self.__gripper.value() == 5:   # roter Ball
                 self.__blueBallInGripper = False
                 self.__redBallInGripper = True  
+                print "roten Ball gegriffen"
                 return order.stop(), Transition.SUCCESS
             else:
                 self.__blueBallInGripper = False
                 self.__redBallInGripper = False  
+                print "leider kein richtiger Ball :("
                 return order.stop(), Transition.FAIL            
             
         
@@ -395,10 +418,7 @@ class Navigator:
             self.__lastChange = time.time()
             return order.open(), 0
         
-        if (self.__lastChange + 2 < time.time()):
-            return order.move(0,-50,-50), 0
-        
-        elif (self.__lastChange + 1 > time.time()):
+        if (self.__lastChange + 1 > time.time()):
             print "zurueckfahren"
             return order.move(0,-50,-47), 0    # zurückfahren
         
